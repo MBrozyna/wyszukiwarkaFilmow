@@ -8,6 +8,9 @@
         <div class="form-group" show-errors>
           <label class="control-label" for="title">Name</label>
           <input name="name" type="text" ng-model="vm.film.title" id="title" class="form-control" placeholder="Title" required>
+          <label>Value1:
+            <input type="checkbox" ng-model="checkboxModel.value1">dasdfasd
+          </label>
           <div ng-messages="vm.form.filmForm.title.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Film title is required.</p>
           </div>

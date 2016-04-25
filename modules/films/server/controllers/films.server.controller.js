@@ -16,7 +16,29 @@ var path = require('path'),
 /**
  * Create a Film
  */
+
+/*function siteMapFinderImdb(){
+
+  var siteMapFinderImdbFlag = false;
+  var imdbUrl1_100 = 'http://www.imdb.com/list/ls004427773/?start=1&view=detail&sort=user_rating:desc';
+  var imdbUrl101_200 = 'http://www.imdb.com/list/ls004427773/?start=101&view=detail&sort=user_rating:desc';
+
+  request(imdbUrl1_100, function (error, response, html) {
+    if (!error && response.statusCode === 200) {
+      var $ = cheerio.load(html);
+      $('.title_wrapper').filter(function () {
+        var title = $(this).children().first().text();
+        //etl title
+        //title = title.replace(/^\s+|\s+$/g, '');
+        title = title.substring(0, title.length - 7);
+        film.title = title;
+      });
+    }
+  })
+};*/
 exports.create = function(req, res) {
+
+ // siteMapFinderImdb();
  // var url = ;
   var film = null;
   var url = 'http://www.imdb.com/title/tt1229340/';
