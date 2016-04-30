@@ -1,27 +1,33 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.film._id ? 'Edit Film' : 'New Film'}}</h1>
+    <center><h1>Dopasuj opcje i uruchom scrapper</h1></center>
   </div>
-  <div class="col-md-12">
-    <form name="vm.form.filmForm" class="form-horizontal" ng-submit="vm.save(vm.form.filmForm.$valid)" novalidate>
+  <div class="col-md-6">
+    <center><h4>Scrapper info</h4></center>
+    <p>Kliknij uruchom scrapper aby rozpocząć zbieranie danych dotyczących filmów z przedstawionych stron.
+      Przynajmniej jedna z dostępnych stron musi być wybrana!
+    </p>
+    <form name="vm.form.filmForm" class="form-horizontal" ng-submit="vm.save(vm.form.filmForm.$valid)" >
       <fieldset>
-        <div class="form-group" show-errors>
-          <label class="control-label" for="title">Name</label>
-          <input name="name" type="text" ng-model="vm.film.title" id="title" class="form-control" placeholder="Title" required>
-          <label>Value1:
-            <input type="checkbox" ng-model="checkboxModel.value1">dasdfasd
-          </label>
-          <div ng-messages="vm.form.filmForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Film title is required.</p>
-          </div>
-        </div>
+        <label>
+          <input type="checkbox" name="imdb" ng-model="vm.film.imdb"> imdb.com
+        </label><br/>
+        <label>
+          <input type="checkbox" name="filmweb" ng-model="vm.film.filmweb"> filmweb.pl
+        </label><br/>
+        <label>
+          <input type="checkbox" name="filmaster" ng-model="vm.film.filmaster"> filmaster.pl
+        </label><br/>
         <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.film._id ? 'Update' : 'Create'}}</button>
-        </div>
+          <button type="submit" class="btn btn-default">Uruchom scrapper</button>
+        </div><br/>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
       </fieldset>
     </form>
+  </div>
+  <div class="col-md-6">
+    <center><h4>Szczegóły dotyczące obecnej bazy danych</h4></center>
   </div>
 </section>

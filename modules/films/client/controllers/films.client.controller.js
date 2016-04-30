@@ -27,7 +27,6 @@
 
     // Save Film
     function save(isValid) {
-      console.log('**********************DODANO******************************');
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.filmForm');
         return false;

@@ -32,7 +32,7 @@
           filmResolve: newFilm
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['admin'],
           pageTitle : 'Films Create'
         }
       })
@@ -70,7 +70,8 @@
             filmResolve: newFilm
           },
           data:{
-            pageTitle: 'Run auto scrapping'
+            pageTitle: 'Run auto scrapping',
+            roles: ['admin']
           }
         })
         .state('Scrapper.createSitemap', {

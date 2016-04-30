@@ -6,7 +6,10 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a ui-sref="home" class="navbar-brand">MEAN.JS</a>
+    <img alt="logo" ui-sref="home" class="navbar-brand" src="modules/core/client/img/brand/logo.png" />
+<!--
+    <a >Wyszukiwarka filmowa</a>
+-->
   </div>
   <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" ng-if="menu.shouldRender(authentication.user);">
@@ -22,11 +25,11 @@
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-hide="authentication.user">
       <li ui-sref-active="active">
-        <a ui-sref="authentication.signup">Sign Up</a>
+        <a ui-sref="authentication.signup">Zarejestruj się</a>
       </li>
       <li class="divider-vertical"></li>
       <li ui-sref-active="active">
-        <a ui-sref="authentication.signin">Sign In</a>
+        <a ui-sref="authentication.signin">Zaloguj się</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right" ng-show="authentication.user">
@@ -37,20 +40,17 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li ui-sref-active="active">
-            <a ui-sref="settings.profile">Edit Profile</a>
+            <a ui-sref="settings.profile">Edytuj profil</a>
           </li>
           <li ui-sref-active="active">
-            <a ui-sref="settings.picture">Change Profile Picture</a>
+            <a ui-sref="settings.picture">Zmień zdjęcie profilowe</a>
           </li>
           <li ui-sref-active="active" ng-show="authentication.user.provider === 'local'">
-            <a ui-sref="settings.password">Change Password</a>
-          </li>
-          <li ui-sref-active="active">
-            <a ui-sref="settings.accounts">Manage Social Accounts</a>
+            <a ui-sref="settings.password">Zmień hasło</a>
           </li>
           <li class="divider"></li>
           <li>
-            <a href="/api/auth/signout" target="_self">Signout</a>
+            <a href="/api/auth/signout" target="_self">Wyloguj</a>
           </li>
         </ul>
       </li>

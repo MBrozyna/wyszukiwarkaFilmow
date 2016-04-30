@@ -53,22 +53,18 @@ function siteMapFinderImdb(){
     console.log('Rozmiar: ' + filmUrlList.length);
     siteMapFinderImdbFlag = true;
   });
-  //while(!siteMapFinderImdbFlag){require('deasync').sleep(100);}
   while(filmUrlList.length !== 500){require('deasync').sleep(100);}
   console.log(filmUrlList.length);
   return filmUrlList;
 }
 exports.create = function(req, res) {
-  //var flag = false;
   var filmUrlList = siteMapFinderImdb();
-  var filmList = [];
   var counter = 0;
   var saveCounter = 0;
   var errorCounter = 0;
   while(!siteMapFinderImdbFlag){require('deasync').sleep(100);}
   filmUrlList.forEach(function(value){
     findImdb(req,value.link);
-    //filmList.push(returnedValue);
   });
 
 
@@ -83,6 +79,7 @@ exports.create = function(req, res) {
         var $ = cheerio.load(html);
         $('.title_wrapper').filter(function () {
           var title = $(this).children().first().text();
+          title = title.replace(/^\s+|\s+$/g, '');
           title = title.substring(0, title.length - 7);
           film.title = title;
         });
@@ -123,7 +120,6 @@ exports.create = function(req, res) {
         console.log('SaveCounter: ' + saveCounter);
         console.log('ErrorCounter: '+ errorCounter);
         findImdb (req,url);
-        //console.log('Status code: ' + response.statusCode);
       }
 
     });
@@ -230,8 +226,5 @@ exports.filmByID = function(req, res, next, id) {
     req.film = film;
     next();
   });
-  /*    function trim(str) {
-            return str.replace(/^\s+|\s+$/g, '');
-        }
-    }*/
+
 };
