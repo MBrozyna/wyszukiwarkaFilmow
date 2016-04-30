@@ -23,7 +23,7 @@ exports.invokeRolesPolicies = function () {
     }, {
       resource: '/api/scrapper',
       permission: ['get', 'post']
-      }]
+    }]
   }, {
     roles: ['user'],
     allows: [{

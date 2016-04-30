@@ -73,15 +73,6 @@
             pageTitle: 'Run auto scrapping',
             roles: ['admin']
           }
-        })
-        .state('Scrapper.createSitemap', {
-          url: '/createSitemap',
-          templateUrl: 'modules/films/client/views/create-sitemap.client.view.html',
-          controller: 'FilmsController',
-          controllerAs: 'vm',
-          resolve: {
-            filmResolve: newFilm
-          }
         });
   }
 
