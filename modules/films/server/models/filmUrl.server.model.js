@@ -10,13 +10,9 @@ var mongoose = require('mongoose'),
  * FilmUrl Schema
  */
 var FilmUrlSchema = new Schema({
-  title : {
+  link : {
     type: Array,
     default: []
-  },
-  baseSite : {
-    type: String,
-    default: ''
   }
 });
 

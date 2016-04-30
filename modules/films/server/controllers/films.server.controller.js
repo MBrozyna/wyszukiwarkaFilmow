@@ -5,62 +5,90 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
+/*
   sitemap = require('sitemap'),
+*/
   cheerio = require('cheerio'),
   fs = require('fs'),
   request = require('request'),
   Film = mongoose.model('Film'),
+  FilmUrl = mongoose.model('FilmUrl'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
-  _ = require('lodash');
+  _ = require('lodash'),
+  siteMapFinderImdbFlag = false;
 
 /**
- * Create a Film
+ * Create a FilmUrl
  */
 
-/*function siteMapFinderImdb(){
-
-  var siteMapFinderImdbFlag = false;
-  var imdbUrl1_100 = 'http://www.imdb.com/list/ls004427773/?start=1&view=detail&sort=user_rating:desc';
-  var imdbUrl101_200 = 'http://www.imdb.com/list/ls004427773/?start=101&view=detail&sort=user_rating:desc';
-
-  request(imdbUrl1_100, function (error, response, html) {
+function siteMapFinderImdb(){
+  var filmUrlList = [];
+  var requestFirst =false;
+  var imdbUrl1_250 = 'http://www.imdb.com/list/ls004427773/?start=1&view=compact&sort=user_rating:desc';
+  var imdbUrl250_500 = 'http://www.imdb.com/list/ls004427773/?start=251&view=compact&sort=user_rating:desc';
+  request(imdbUrl1_250, function (error, response, html) {
     if (!error && response.statusCode === 200) {
       var $ = cheerio.load(html);
-      $('.title_wrapper').filter(function () {
-        var title = $(this).children().first().text();
-        //etl title
-        //title = title.replace(/^\s+|\s+$/g, '');
-        title = title.substring(0, title.length - 7);
-        film.title = title;
+      $('.title').filter(function () {
+        var filmUrl = new FilmUrl();
+        if(typeof $(this).children().attr('href') !== 'undefined') {
+          filmUrl.link = 'http://www.imdb.com' + $(this).children().attr('href');
+          filmUrlList.push(filmUrl);
+        }
       });
     }
-  })
-};*/
+    requestFirst=true;
+  });
+  request(imdbUrl250_500, function (error, response, html) {
+    if (!error && response.statusCode === 200) {
+      var $ = cheerio.load(html);
+      $('.title').filter(function () {
+        var filmUrl = new FilmUrl();
+        if(typeof $(this).children().attr('href') !== 'undefined'){
+          filmUrl.link = 'http://www.imdb.com' + $(this).children().attr('href');
+          filmUrlList.push(filmUrl);
+        }
+      });
+    }
+    console.log('Rozmiar: ' + filmUrlList.length);
+    siteMapFinderImdbFlag = true;
+  });
+  //while(!siteMapFinderImdbFlag){require('deasync').sleep(100);}
+  while(filmUrlList.length !== 500){require('deasync').sleep(100);}
+  console.log(filmUrlList.length);
+  return filmUrlList;
+}
 exports.create = function(req, res) {
+  //var flag = false;
+  var filmUrlList = siteMapFinderImdb();
+  var filmList = [];
+  var counter = 0;
+  var saveCounter = 0;
+  var errorCounter = 0;
+  while(!siteMapFinderImdbFlag){require('deasync').sleep(100);}
+  filmUrlList.forEach(function(value){
+    findImdb(req,value.link);
+    //filmList.push(returnedValue);
+  });
 
- // siteMapFinderImdb();
- // var url = ;
-  var film = null;
-  var url = 'http://www.imdb.com/title/tt1229340/';
-  film = findImdb(req,url);
-  var flag = false;
+
+
   function findImdb (req,url) {
+    console.log('Started imdb function. ' + url);
     var film = new Film(req);
-
-    request('http://www.imdb.com/title/tt1229340/', function (error, response, html) {
+    request(String(url), function (error, response, html) {
+      console.log('Started request: ' + url);
       if (!error && response.statusCode === 200) {
+        console.log('Without error code');
         var $ = cheerio.load(html);
         $('.title_wrapper').filter(function () {
           var title = $(this).children().first().text();
-          //etl title
-          //title = title.replace(/^\s+|\s+$/g, '');
           title = title.substring(0, title.length - 7);
           film.title = title;
         });
         $('#titleYear').filter(function () {
           film.release = $(this).children().first().text();
         });
-        //to add with filmweb scraper
         $('.ratingValue').filter(function () {
           film.rating = $(this).children().first().text();
         });
@@ -71,7 +99,7 @@ exports.create = function(req, res) {
           film.duration = $(this).text();
         });
         $('#titleAwardsRanks').find('span[itemprop="awards"] b').filter(function () {
-          film.won = $(this).text();
+          //film.won = $(this).text();
         });
         $('.credit_summary_item span[itemprop="director"] span[itemprop="name"]').filter(function () {
           film.director = $(this).text();
@@ -83,31 +111,38 @@ exports.create = function(req, res) {
           film.country = $(this).text();
         });
         film.baseSite = 'imdb.com';
-        flag = true;
+        counter++;
+        var suma = counter + errorCounter;
+        console.log(suma);
+        return save(film);
       }
+      else {
+        errorCounter++;
+        console.log('Błąd: ' + error);
+        console.log('Counter: ' + counter);
+        console.log('SaveCounter: ' + saveCounter);
+        console.log('ErrorCounter: '+ errorCounter);
+        findImdb (req,url);
+        //console.log('Status code: ' + response.statusCode);
+      }
+
     });
-    while(!flag){require('deasync').sleep(100);}
+  }
+  function save(film){
     film.save(function(err) {
+      saveCounter++;
       if (err) {
+        console.log(film);
         return res.status(400).send({
           message: errorHandler.getErrorMessage(err)
         });
       }
       else {
-        res.jsonp(film);
+       // while(counter !== 250){require('deasync').sleep(100);}
+       // res.jsonp(film);
       }
     });
   }
-  /*film.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
-    else {
-      res.jsonp(film);
-    }
-  });*/
 };
 
 /**
