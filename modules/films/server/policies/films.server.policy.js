@@ -21,8 +21,8 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/films/:filmId',
       permissions: '*'
     }, {
-      resource: '/api/scrapper',
-      permission: ['get', 'post']
+      resources: '/api/scrapper',
+      permissions: ['get', 'post']
     }]
   }, {
     roles: ['user'],
