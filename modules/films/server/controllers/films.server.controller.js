@@ -58,14 +58,14 @@ function siteMapFinderImdb(){
   return filmUrlList;
 }
 exports.create = function(req, res) {
-  var filmUrlList = siteMapFinderImdb();
+  //var filmUrlList = siteMapFinderImdb();
   var counter = 0;
   var saveCounter = 0;
   var errorCounter = 0;
-  while(!siteMapFinderImdbFlag){require('deasync').sleep(100);}
+  /*while(!siteMapFinderImdbFlag){require('deasync').sleep(100);}
   filmUrlList.forEach(function(value){
     findImdb(req,value.link);
-  });
+  });*/
 
 
 
@@ -195,6 +195,18 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
   Film.find().sort('-created').populate('user', 'displayName').exec(function(err, films) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(films);
+    }
+  });
+};
+exports.countryList = function(req, res){
+  console.log('started country list exports');
+  Film.find().distinct('type').exec(function(err, films) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

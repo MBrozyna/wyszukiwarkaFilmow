@@ -6,13 +6,15 @@
     .module('films')
     .controller('FilmsController', FilmsController);
 
-  FilmsController.$inject = ['$scope', '$state', 'Authentication', 'filmResolve'];
+  FilmsController.$inject = ['$scope', '$state', 'Authentication', 'filmResolve', 'FilmsService'];
 
-  function FilmsController ($scope, $state, Authentication, film) {
+  function FilmsController ($scope, $state, Authentication, film, FilmsService) {
     var vm = this;
 
     vm.authentication = Authentication;
     vm.film = film;
+    vm.films = FilmsService.query();
+    vm.typesList = FilmsService.query();
     vm.error = null;
     vm.form = {};
     vm.remove = remove;

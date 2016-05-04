@@ -27,20 +27,9 @@
       </fieldset>
     </form>
   </div>
-  <div class="col-md-6" controller="FilmsListController">
+  <div class="col-md-6">
     <center><h4>Szczegóły dotyczące obecnej bazy danych</h4></center>
-    <p>{{vm.films.length}} - długość</p>
-    <a data-ng-repeat="film in vm.films"
-       data-ui-sref="films.view({ filmId: film._id })"
-       class="list-group-item">
-      <small class="list-group-item-text">
-        Posted on
-        <span data-ng-bind="film.created | date:'mediumDate'"></span>
-        by
-        <span data-ng-if="film.user" data-ng-bind="film.user.displayName"></span>
-        <span data-ng-if="!film.user">Deleted User</span>
-      </small>
-      <h4 class="list-group-item-heading" data-ng-bind="film.name"></h4>
-    </a>
+    <p>{{vm.films.length}} - liczba elementów</p>
+    <p>{{vm.films}}</p>
   </div>
 </section>

@@ -8,25 +8,67 @@
     <br>
     <div class="row">
       <p class="lead">z serwisów Imdb.com, Filmweb.pl oraz Filmaster.pl</p>
-      <form name="vm.form.filmForm" class="form-horizontal" ng-submit="vm.save(vm.form.filmForm.$valid)" novalidate>
-        <fieldset>
-          <div class="form-group" show-errors>
-            <label class="control-label" for="name">Name</label>
-            <input name="name" type="text" ng-model="vm.film.name" id="name" class="form-control" placeholder="Name" required>
-            <div ng-messages="vm.form.filmForm.name.$error" role="alert">
-              <p class="help-block error-text" ng-message="required">Film name is required.</p>
+      <div class="col-md-6">
+        <form name="vm.form.filmForm" class="form-horizontal" ng-submit="vm.save(vm.form.filmForm.$valid)" novalidate>
+          <fieldset>
+            <div class="form-group" show-errors>
+              <label class="control-label" for="country">Kraj</label>
+              <select name="singleSelect" ng-model="vm.film.country" id="country" class="form-control" placeholder="Country" multiple>
+                <option value="option-1">USA</option>
+                <option value="option-2">Nie Usa</option>
+              </select>
+              <label class="control-label" for="director">Reżyser</label>
+              <input name="name" type="text" ng-model="vm.film.director" id="director" class="form-control" placeholder="Reżyser" required>
+              <label class="control-label" for="cast">Aktorzy</label>
+              <input name="name" type="text" ng-model="vm.film.cast" id="cast" class="form-control" placeholder="Aktorzy" required>
+              <div class="col-md-6">
+                <label class="control-label" for="dateFrom">Data od</label>
+                <input name="name" type="text" ng-model="vm.film.dateFrom" id="dateFrom" class="form-control" placeholder="Rok produkcji w formacie yyyy" required>
+              </div>
+              <div class="col-md-6">
+                <label class="control-label" for="dateTo">Data do</label>
+                <input name="name" type="text" ng-model="vm.film.dateTo" id="dateTo" class="form-control" placeholder="Rok produkcji w formacie yyyy" required>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg">Uruchom wyszukiwanie</button>
-          </div>
-          <div ng-show="vm.error" class="text-danger">
-            <strong ng-bind="vm.error"></strong>
-          </div>
-        </fieldset>
-      </form>
+          </fieldset>
+        </form>
+      </div>
+      <div class="col-md-6">
+        <label class="control-label" for="country">Maksymalna długość</label>
+        <input name="name" type="text" ng-model="vm.film.duration" id="duration" class="form-control" placeholder="Czas trwania w minutach" required>
+        <label class="control-label" for="country">Typ</label>
+        <select name="multipleType" ng-model="vm.film.type" id="type" class="form-control" placeholder="Typ" multiple>
+          <option value="option-1">Dramat</option>
+          <option value="option-2">Nie dramat</option>
+        </select>
+        <label class="control-label" for="country">Strona źródłowa</label></br>
+        <label>
+          <input type="checkbox" name="imdb" ng-model="vm.film.imdb"> imdb.com
+        </label><br/>
+        <label>
+          <input type="checkbox" name="filmweb" ng-model="vm.film.filmweb"> filmweb.pl
+        </label><br/>
+        <label>
+          <input type="checkbox" name="filmaster" ng-model="vm.film.filmaster"> filmaster.pl
+        </label><br/>
+        <label class="control-label" for="country">Ocena</label>
+        <input name="name" type="text" ng-model="vm.film.rating" id="rating" class="form-control" placeholder="Przykład: 9,8" required></br>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-lg">Uruchom wyszukiwanie</button>
+        </div>
+      </div>
+      <div ng-show="vm.error" class="text-danger">
+        <strong ng-bind="vm.error"></strong>
+      </div>
     </div>
   </div>
+  <p>Informacje: Przymanjmniej jedna strona źródłowa musi zostać uzupełniona. Do każdego wyszukiwania zalicza się średnia ocen z wybranego/wybranych serwisów *10, oraz suma otrzymanych nagród *5 oraz nominacji.
+    W przypadku, gdy wypełnionych jest więcej danych, każda pasująca dana ma przelicznik 5.</p>
+  <br><strong>Przykład:</strong> </br>Szukamy filmu, który wyreżyserował Howard Hawks, ma maksymalnie 150 minut długości oraz zalicza się do gatunku thriller oraz komedia. Źródłem wyszukiwania ma być strona imdb.com</p>
+  <br>Dla filmu<strong> Drapiezne malenstwo </strong>otrzymujemy następujący wynik wyszukiwania: </br>
+  Wynik = 8 (średnia ocen) * 10 + (liczba nagród) * 5 + liczba nominacji + 5(zgodny reżyser) + 5(czas trwania filmu) + 5(gatunek komedia) + 0( brak gatunku thriller w opisie filmu).</p>
   <div class="row">
     <h2>Ostanio znalezione:</h2>
     <div class="col-md-3">
