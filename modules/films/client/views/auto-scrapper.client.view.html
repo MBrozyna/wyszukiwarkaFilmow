@@ -30,6 +30,11 @@
   <div class="col-md-6">
     <center><h4>Szczegóły dotyczące obecnej bazy danych</h4></center>
     <p>{{vm.films.length}} - liczba elementów</p>
-    <p>{{vm.films}}</p>
+    <div ng-repeat="film in vm.films | unique: 'baseSite'">
+      <p>{{film.length}} - liczba stron źródłowych</p>
+      <div ng-repeat="type in film.type | unique:'type'">
+        <p>{{type.length}} - gatunków filmowych</p>
+      </div>
+    </div>
   </div>
 </section>

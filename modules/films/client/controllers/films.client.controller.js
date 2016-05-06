@@ -14,7 +14,6 @@
     vm.authentication = Authentication;
     vm.film = film;
     vm.films = FilmsService.query();
-    vm.typesList = FilmsService.query();
     vm.error = null;
     vm.form = {};
     vm.remove = remove;
@@ -51,5 +50,8 @@
         vm.error = res.data.message;
       }
     }
+    $scope.types = function(films) {
+      return user.User.Stats[0].active === "1";
+    };
   }
 })();

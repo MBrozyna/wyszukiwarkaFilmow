@@ -1,21 +1,23 @@
 <section>
   <div class="page-header">
-    <h1 data-ng-bind="vm.film.name"></h1>
+    <h1 data-ng-bind="vm.film.title"></h1>
   </div>
-  <div class="pull-right"
+  <!--<div class="pull-right"
        data-ng-show="vm.film.isCurrentUserOwner">
     <a class="btn btn-primary"
        data-ui-sref="films.edit({ filmId: vm.film._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
+
     <a class="btn btn-primary" data-ng-click="vm.remove()">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
-  </div>
+  </div>-->
+
   <small>
     <em class="text-muted">
       Posted on
-      <span data-ng-bind="vm.film.created | date:'mediumDate'"></span>
+      <span data-ng-bind="vm.film.title | date:'mediumDate'"></span>
       by
       <span data-ng-if="vm.film.user"
             data-ng-bind="vm.film.user.displayName"></span>
