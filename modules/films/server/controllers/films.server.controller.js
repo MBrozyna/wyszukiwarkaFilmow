@@ -5,9 +5,6 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-/*
-  sitemap = require('sitemap'),
-*/
   cheerio = require('cheerio'),
   fs = require('fs'),
   request = require('request'),
@@ -58,14 +55,14 @@ function siteMapFinderImdb(){
   return filmUrlList;
 }
 exports.create = function(req, res) {
-  //var filmUrlList = siteMapFinderImdb();
+  var filmUrlList = siteMapFinderImdb();
   var counter = 0;
   var saveCounter = 0;
   var errorCounter = 0;
-  /*while(!siteMapFinderImdbFlag){require('deasync').sleep(100);}
+  while(!siteMapFinderImdbFlag){require('deasync').sleep(100);}
   filmUrlList.forEach(function(value){
     findImdb(req,value.link);
-  });*/
+  });
 
 
 

@@ -13,6 +13,7 @@
     var vm = this;
 
     vm.authentication = Authentication;
+    vm.film = film;
     vm.films = [];
     vm.types = [];
     vm.cast = [];
@@ -72,7 +73,6 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.filmForm');
         return false;
       }
-
       // TODO: move create/update logic to service
       if (vm.film._id) {
         vm.film.$update(successCallback, errorCallback);

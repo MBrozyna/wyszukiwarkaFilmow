@@ -10,7 +10,6 @@ module.exports = function(app) {
   // Films Routes
   app.route('/api/films').all(filmsPolicy.isAllowed)
     .get(films.list)
-    /*.get(films.countryList)*/
     .post(films.create);
 
   app.route('/api/films/:filmId').all(filmsPolicy.isAllowed)
