@@ -54,9 +54,13 @@ var FilmSchema = new Schema({
     type: Array,
     default: []
   },
-  director: {
+  description: {
     type: String,
-    default:''
+    default: ''
+  },
+  director: {
+    type: Array,
+    default:[]
   }
 });
 

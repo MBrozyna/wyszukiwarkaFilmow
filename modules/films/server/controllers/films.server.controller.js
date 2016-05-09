@@ -75,7 +75,7 @@ function siteMapFinderFilmweb(){
     });
   }
   siteMapFinderFilmwebFlag = true;
-  while(filmUrlList.length !== urlList.length){require('deasync').sleep(100);}
+  while(filmUrlList.length !== (urlList.length * 10)){require('deasync').sleep(100);}
   console.log(filmUrlList.length);
   return filmUrlList;
 }
@@ -181,36 +181,41 @@ exports.create = function(req, res) {
       if (!error && response.statusCode === 200) {
         console.log('Without error code');
         var $ = cheerio.load(html);
-        $('.inline filmTitle').filter(function () {
+        $('.inline').filter(function () {
           var title = $(this).children().first().text();
           film.title = title;
           console.log(title);
         });
         $('.halfSize').filter(function () {
-          film.release = $(this).first().text();
+          var release = $(this).first().text();
+          film.release = release.substring(1, release.length -1);
         });
-        $('.s-42 vertical-align light span[property="v:average"]').filter(function () {
+        $('.s-42').filter(function () {
+          film.rating = $(this).children().first().text();
+        });
+        $('.genresList').filter(function () {
           film.type.push($(this).text());
         });
-        $('.subtext span[itemprop="genre"]').filter(function () {
-          film.type.push($(this).text());
+        $('.inline').find('a[rel="v:directedBy"]').filter(function () {
+          film.director.push($(this).text());
         });
-        $('#titleDetails').find('.txt-block time[itemprop="duration"]').filter(function () {
-          film.duration = $(this).text();
+        $('.inline').find('a[href*="countryIds"]').filter(function () {
+          film.country.push($(this).text());
         });
+
+
+
+
         $('#titleAwardsRanks').find('span[itemprop="awards"] b').filter(function () {
           //film.won = $(this).text();
         });
-        $('.credit_summary_item span[itemprop="director"] span[itemprop="name"]').filter(function () {
-          film.director = $(this).text();
-        });
+
+
         $('#titleCast').find('span[itemprop="name"]').filter(function () {
           film.cast.push($(this).text());
         });
-        $('#titleDetails').find('a[href*="country"]').filter(function () {
-          film.country = $(this).text();
-        });
-        film.baseSite = 'imdb.com';
+
+        film.baseSite = 'filmweb.pl';
         counter++;
         var suma = counter + errorCounter;
         console.log(suma);
