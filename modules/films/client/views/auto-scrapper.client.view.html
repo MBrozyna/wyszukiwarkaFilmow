@@ -7,20 +7,24 @@
     <p>Kliknij uruchom scrapper aby rozpocząć zbieranie danych dotyczących filmów z przedstawionych stron.
       Przynajmniej jedna z dostępnych stron musi być wybrana!
     </p>
-    <form name="vm.form.filmForm" class="form-horizontal" ng-submit="vm.save(vm.form.filmForm.$valid)" >
+    <form name="vm.form.filmForm" class="form-horizontal" ng-submit="vm.save(vm.form.filmForm.$valid)">
       <fieldset>
         <label>
-          <input type="checkbox" name="imdb" ng-model="vm.film.imdb"> imdb.com
+          <input type="checkbox" name="imdb" value="imdb" ng-model="vm.film.imdb"> imdb.com
         </label><br/>
         <label>
-          <input type="checkbox" name="filmweb" ng-model="vm.film.filmweb"> filmweb.pl
+          <input type="checkbox" name="filmweb" value="filmweb" ng-model="vm.film.filmweb"> filmweb.pl
         </label><br/>
         <label>
-          <input type="checkbox" name="filmaster" ng-model="vm.film.filmaster"> filmaster.pl
+          <input type="checkbox" name="filmaster" value="filmaster" ng-model="vm.film.filmaster"> filmaster.pl
         </label><br/>
         <div class="form-group">
-          <button type="submit" class="btn btn-default">Uruchom scrapper</button>
-        </div><br/>
+          <button type="submit" class="btn btn-default" ng-click="showme=true">Uruchom scrapper</button>
+        </div>
+        <br/>
+          <div ng-show="showme" class="bg-success">
+            <strong >Scrapper zbiera informacje automatycznie, możesz dalej poruszać się po stronie.</strong>
+          </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>
@@ -29,6 +33,7 @@
   </div>
   <div class="col-md-6">
     <center><h4>Szczegóły dotyczące obecnej bazy danych</h4></center>
-    <p>W naszej bazie znajduje się <b>{{vm.films.length}}</b> elementów, z <b>{{vm.countries.length}}</b> krajów, z <b>{{vm.types.length}}</b> gatunków filmowych, w których zagrało <b>{{vm.cast.length}}</b> aktorów.</p>
+    <p>W naszej bazie znajduje się <b>{{vm.films.length}}</b> elementów, z <b>{{vm.countries.length}}</b> krajów, z <b>{{vm.types.length}}</b>
+      gatunków filmowych, w których zagrało <b>{{vm.cast.length}}</b> aktorów.</p>
   </div>
 </section>

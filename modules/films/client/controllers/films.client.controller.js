@@ -5,7 +5,6 @@
   angular
     .module('films')
     .controller('FilmsController', FilmsController);
-    /*.filter('TypeFilter', TypeFilter);*/
 
   FilmsController.$inject = ['$scope', '$state', '$q', 'Authentication', 'filmResolve', 'FilmsService'];
 
@@ -87,7 +86,9 @@
       }
 
       function errorCallback(res) {
-        vm.error = res.data.message;
+        if(res.data !== null){
+          vm.error = res.data.message;
+        }
       }
     }
   }
