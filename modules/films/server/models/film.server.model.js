@@ -18,9 +18,21 @@ var FilmSchema = new Schema({
     type: String,
     default: ''
   },
-  rating : {
+  ratingFilmweb : {
     type: String,
     default: 0
+  },
+  ratingImdb : {
+    type: String,
+    default: 0
+  },
+  ratingFilmaster : {
+    type: String,
+    default: 0
+  },
+  img : {
+    type: String,
+    default: ''
   },
   type: {
     type: Array,

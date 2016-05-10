@@ -192,7 +192,7 @@ exports.create = function(req, res) {
           film.release = release.substring(1, release.length -2);
         });
         $('.s-42').filter(function () {
-          film.rating = $(this).children().first().text();
+          film.ratingFilmweb = $(this).children().first().text();
         });
         $('.genresList').filter(function () {
           film.type.push($(this).text());
@@ -208,6 +208,9 @@ exports.create = function(req, res) {
         });
         $('.filmCast').children().find('a[rel="v:starring"]').filter(function () {
           film.cast.push($(this).text());
+        });
+        $('.posterLightbox').find('a[rel="v:image"]').filter(function(){
+          film.img = $(this).attr('href');
         });
         film.baseSite = 'filmweb.pl';
 
