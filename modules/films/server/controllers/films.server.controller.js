@@ -100,11 +100,12 @@ exports.create = function(req, res) {
   }
   if(req.body.filmweb){
     console.log('zbieraj z filmweb');
-    var filmUrlListFilmweb = siteMapFinderFilmweb();
+/*    var filmUrlListFilmweb = siteMapFinderFilmweb();
     while(!siteMapFinderFilmwebFlag){require('deasync').sleep(100);}
     filmUrlListFilmweb.forEach(function(value){
       findFilmweb(req,value.link);
-    });
+    });*/
+    findFilmweb(req,'http://www.filmweb.pl/Skazani.Na.Shawshank');
   }
   if(req.body.filmaster){
     console.log('zbieraj z filmaster');
@@ -181,14 +182,14 @@ exports.create = function(req, res) {
       if (!error && response.statusCode === 200) {
         console.log('Without error code');
         var $ = cheerio.load(html);
-        $('.inline').filter(function () {
-          var title = $(this).children().first().text();
+        $('.inline').find('a[property="v:name"]').filter(function () {
+          var title = $(this).text();
           film.title = title;
           console.log(title);
         });
         $('.halfSize').filter(function () {
           var release = $(this).first().text();
-          film.release = release.substring(1, release.length -1);
+          film.release = release.substring(1, release.length -2);
         });
         $('.s-42').filter(function () {
           film.rating = $(this).children().first().text();
@@ -202,20 +203,19 @@ exports.create = function(req, res) {
         $('.inline').find('a[href*="countryIds"]').filter(function () {
           film.country.push($(this).text());
         });
-
-
-
-
-        $('#titleAwardsRanks').find('span[itemprop="awards"] b').filter(function () {
-          //film.won = $(this).text();
+        $('.filmPlot').filter(function () {
+          film.description = $(this).children().text();
         });
-
-
-        $('#titleCast').find('span[itemprop="name"]').filter(function () {
+        $('.filmCast').children().find('a[rel="v:starring"]').filter(function () {
           film.cast.push($(this).text());
         });
-
         film.baseSite = 'filmweb.pl';
+
+
+
+
+
+
         counter++;
         var suma = counter + errorCounter;
         console.log(suma);
@@ -227,7 +227,7 @@ exports.create = function(req, res) {
         console.log('Counter: ' + counter);
         console.log('SaveCounter: ' + saveCounter);
         console.log('ErrorCounter: '+ errorCounter);
-        findImdb (req,url);
+        findFilmweb (req,url);
       }
 
     });

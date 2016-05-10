@@ -19,7 +19,7 @@ var FilmSchema = new Schema({
     default: ''
   },
   rating : {
-    type: Number,
+    type: String,
     default: 0
   },
   type: {
