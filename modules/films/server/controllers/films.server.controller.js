@@ -212,9 +212,6 @@ exports.create = function(req, res) {
         $('.posterLightbox').find('a[rel="v:image"]').filter(function(){
           film.img = $(this).attr('href');
         });
-        film.baseSite = 'filmweb.pl';
-
-
 
 
 
