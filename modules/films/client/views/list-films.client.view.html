@@ -2,22 +2,26 @@
   <div class="page-header">
     <center><h1>Lista filmów</h1></center>
   </div>
+  <div class="col-md-4" style="margin-top: 2em">
+    <input class="form-control col-md-4" type="text" ng-model="search" placeholder="Search" ng-change="figureOutItemsToDisplay()" />
+  </div></br></br></br></br></br></br></br></br></br>
   <div class="list-group">
-    <a data-ng-repeat="film in vm.films"
+    <a data-ng-repeat="film in pagedItems"
        data-ui-sref="films.view({ filmId: film._id })"
        class="list-group-item">
         <small class="list-group-item-text">
           <div class="col-md-3">
             <img src="{{film.img}}" alt="{{film.title}}" title="{{film.title}}" width="70" height="100" >
           </div>
-              <h3>{{film.title}}</h3>
-              <span data-ng-bind="film.description"></span>
+              <h3>{{film.title}}</h3></br>
+              <span data-ng-bind="film.description"></span></br>
               <span></span>
         </small>
       <h4 class="list-group-item-heading" data-ng-bind="film.name"></h4>
     </a>
   </div>
-  <div class="alert alert-warning text-center" data-ng-if="vm.films.$resolved && !vm.films.length">
+  <div class="alert alert-warning text-center" data-ng-if="films.$resolved && !films.length">
     Baza filmów jest pusta :(
   </div>
+  <pagination boundary-links="true" max-size="8" items-per-page="itemsPerPage" total-items="filterLength" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 </section>

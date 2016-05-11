@@ -61,7 +61,7 @@
 
     // Remove existing Film
     function remove() {
-      if (confirm('Are you sure you want to delete?')) {
+      if (confirm('Czy chcesz usunąć')) {
         vm.film.$remove($state.go('films.list'));
       }
     }

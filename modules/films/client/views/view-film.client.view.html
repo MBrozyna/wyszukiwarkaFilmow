@@ -1,28 +1,47 @@
-<section>
+<br>
   <div class="page-header">
     <h1 data-ng-bind="vm.film.title"></h1>
   </div>
-  <!--<div class="pull-right"
-       data-ng-show="vm.film.isCurrentUserOwner">
-    <a class="btn btn-primary"
-       data-ui-sref="films.edit({ filmId: vm.film._id })">
-      <i class="glyphicon glyphicon-edit"></i>
-    </a>
-
-    <a class="btn btn-primary" data-ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>-->
-
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span data-ng-bind="vm.film.title | date:'mediumDate'"></span>
-      by
-      <span data-ng-if="vm.film.user"
-            data-ng-bind="vm.film.user.displayName"></span>
-      <span data-ng-if="!vm.film.user">Deleted User</span>
-    </em>
-  </small>
+  <div class="col-md-2">
+    <img src="{{vm.film.img}}" alt="{vm.film.title}}" title="{{vm.film.title}}" width="140" height="200">
+  </div>
+  <div class="col-md-10">
+    <em class="text-muted" ng-bind="vm.film.description"></em>
+    <span></span></br></br>
+    <div class="col-md-4" data-ng-if="vm.film.ratingFilmweb != '0'">
+      <center><h4>Filmweb:</h4>
+      <img src="modules/core/client/img/brand/star.png" alt="{{vm.film.title}}" title="{{vm.film.title}}" width="30" height="30" >
+      <em><b>{{vm.film.ratingFilmweb}}</b></em></center>
+    </div>
+    <div class="col-md-4" data-ng-if="vm.film.ratingImdb != '0'">
+      <center><h4>Imdb:</h4>
+      <img src="modules/core/client/img/brand/star.png" alt="{{vm.film.title}}" title="{{vm.film.title}}" width="30" height="30" >
+      <em><b>{{vm.film.ratingImdb}}</b></em></center>
+    </div>
+    <div class="col-md-4" data-ng-if="vm.film.ratingFilmaster != '0'">
+      <center><h4>Filmaster:</h4>
+      <img src="modules/core/client/img/brand/star.png" alt="{{vm.film.title}}" title="{{vm.film.title}}" width="30" height="30" >
+      <em><b>{{vm.film.ratingFilmaster}}</b></em></center>
+    </div>
+    <div class="col-md-6">
+      </br></br><span>Reżyser: </span>
+      <b><span data-ng-repeat="director in vm.film.director" ng-bind="director">
+      </span> <span ng-repeat-end></span></br></br></b>
+      <span>Kraj: </span>
+      <b><span data-ng-repeat="country in vm.film.country" ng-bind="country">
+      </span> <span ng-repeat-end></span></br></br></b>
+      <p>Aktorzy: </p>
+      <b><div data-ng-repeat="star in vm.film.cast" ng-bind="star"> <span ng-repeat-end></span></br>
+      </div></b>
+    </div>
+    <div class="col-md-6">
+      </br></br><div data-ng-if="vm.film.won != '0'">
+        <span>Zdobyte nagrody: <b>{{vm.film.won}}</b></span>
+        <div data-ng-if="vm.film.nominations !='0'">
+          <span>Nominacje: <b>{{vm.film.nominations }}</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
   <p class="lead" data-ng-bind="vm.film.content"></p>
 </section>

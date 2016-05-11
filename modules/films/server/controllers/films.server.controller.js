@@ -58,8 +58,8 @@ function siteMapFinderImdb(){
 function siteMapFinderFilmweb(){
   var urlList = filmwebLinkGenerator();
   var filmUrlList = [];
-  //while(typeof urlList === 'undefined'){require('deasync').sleep(100);}
   for(var i=0;i<urlList.length;i++){
+    /*jshint loopfunc: true */
     request(urlList[i],function (error, response, html) {
       if (!error && response.statusCode === 200) {
         var $ = cheerio.load(html);
@@ -100,12 +100,12 @@ exports.create = function(req, res) {
   }
   if(req.body.filmweb){
     console.log('zbieraj z filmweb');
-/*    var filmUrlListFilmweb = siteMapFinderFilmweb();
+    var filmUrlListFilmweb = siteMapFinderFilmweb();
     while(!siteMapFinderFilmwebFlag){require('deasync').sleep(100);}
     filmUrlListFilmweb.forEach(function(value){
       findFilmweb(req,value.link);
-    });*/
-    findFilmweb(req,'http://www.filmweb.pl/Skazani.Na.Shawshank');
+    });
+    //findFilmweb(req,'http://www.filmweb.pl/Jak.Rozpetalem.Druga.Wojne.Swiatowa');
   }
   if(req.body.filmaster){
     console.log('zbieraj z filmaster');
@@ -177,6 +177,8 @@ exports.create = function(req, res) {
   function findFilmweb(req,url){
     console.log('Started filmweb function. ' + url);
     var film = new Film(req);
+    var awardsFlag = false;
+    var defaultFlag = false;
     request(String(url), function (error, response, html) {
       console.log('Started request: ' + url);
       if (!error && response.statusCode === 200) {
@@ -189,13 +191,18 @@ exports.create = function(req, res) {
         });
         $('.halfSize').filter(function () {
           var release = $(this).first().text();
-          film.release = release.substring(1, release.length -2);
+          film.release = release.substring(1, release.length - 2);
         });
         $('.s-42').filter(function () {
           film.ratingFilmweb = $(this).children().first().text();
         });
-        $('.genresList').filter(function () {
-          film.type.push($(this).text());
+        $('.genresList li').filter(function () {
+          var value = $(this);
+          for(var i =0; i<$(this).length;i++){
+            console.log(value.text() + ', ' + value.next().text());
+            film.type.push(value.text());
+            value = $(this).next();
+          }
         });
         $('.inline').find('a[rel="v:directedBy"]').filter(function () {
           film.director.push($(this).text());
@@ -209,28 +216,58 @@ exports.create = function(req, res) {
         $('.filmCast').children().find('a[rel="v:starring"]').filter(function () {
           film.cast.push($(this).text());
         });
-        $('.posterLightbox').find('a[rel="v:image"]').filter(function(){
+        $('.posterLightbox').find('a[rel="v:image"]').filter(function () {
           film.img = $(this).attr('href');
         });
-
-
-
-
-        counter++;
-        var suma = counter + errorCounter;
-        console.log(suma);
-        return save(film);
+        defaultFlag =true;
       }
       else {
         errorCounter++;
         console.log('Błąd: ' + error);
         console.log('Counter: ' + counter);
         console.log('SaveCounter: ' + saveCounter);
-        console.log('ErrorCounter: '+ errorCounter);
-        findFilmweb (req,url);
+        console.log('ErrorCounter: ' + errorCounter);
+        findFilmweb(req, url);
       }
-
     });
+    request(String(url + '/awards'), function (error, response, html) {
+      if (!error && response.statusCode === 200) {
+        var $ = cheerio.load(html);
+        $('.awardCounter').filter(function () {
+          
+          var won = $(this).children().text().match(/\d+/g);
+          if(typeof won !== 'undefined' && won !== null){
+            if(won.length === 2){
+              film.won = won[0];
+              film.nominations = won[1];
+            }
+            else if(won.length === 1){
+              if($(this).children().text().indexOf('nominacje') > -1){
+                film.nominations = won[0];
+              }
+              else if ($(this).children().text().indexOf('wygrane') > -1){
+                film.won = won[0];
+              }
+            }
+          }
+          awardsFlag = true;
+        });
+      }
+      else {
+        errorCounter++;
+        console.log('Błąd: ' + error);
+        console.log('Counter: ' + counter);
+        console.log('SaveCounter: ' + saveCounter);
+        console.log('ErrorCounter: ' + errorCounter);
+        findFilmweb(req, url);
+      }
+    });
+    counter++;
+    var suma = counter + errorCounter;
+    console.log(suma);
+    while(!awardsFlag){require('deasync').sleep(100);}
+    while(!defaultFlag){require('deasync').sleep(100);}
+    return save(film);
   }
   function save(film){
     film.save(function(err) {
