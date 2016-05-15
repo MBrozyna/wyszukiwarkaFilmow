@@ -15,7 +15,9 @@ var path = require('path'),
   siteMapFinderImdbFlag = false,
   siteMapFinderFilmwebFlag = false,
   siteMapFinderFilmasterFlag = false,
-  updateFlag = false;
+  updateFlag = false,
+  genreDictionary = [{key: 'Action', value: 'Akcja'}, {key: 'Adventure', value: 'Przygodowy'}, {key: 'Animation', value: 'Animacja'}, {key: 'Biography', value: 'Biograficzny'}, {key: 'Comedy', value: 'Komedia'}, {key: 'Crime', value: 'Gangsterski'}, {key: 'Documentary', value: 'Dokumentalny'}, {key: 'Drama', value: 'Dramat'}, {key: 'Family', value: 'Familijny'}, {key: 'Fantasy', value: 'Fantasy'}, {key: 'Film-Noir', value: 'Film-Noir'}, {key: 'History', value: 'Historyczny'}, {key: 'Horror', value: 'Horror'}, {key: 'Music', value: 'Muzyczny'}, {key: 'Musical', value: 'Musical'}, {key: 'Mystery', value: 'Baśń'}, {key: 'Romance', value: 'Romans'}, {key: 'Sci-Fi', value: 'Sci-Fi'}, {key: 'Sport', value: 'Sportowy'}, {key: 'Thriller', value: 'Thriller'}, {key: 'War', value: 'Wojenny'}, {key: 'Western', value: 'Western'}],
+  countriesDictionary = [{key: 'Argentina', value: 'Argentyna'}, {key: 'Australia', value: 'Australia'}, {key: 'Austria', value: 'Austria'}, {key: 'Belgium', value: 'Belgia'}, {key: 'Brazil', value: 'Brazylia'},{key: 'Bulgaria', value: 'Bułgaria'}, {key: 'Canada', value: 'Kanada'}, {key: 'China', value: 'Chiny'}, {key: 'Colombia', value: 'Kolumbia'},{key: 'Costa Rica', value: 'Kostaryka'}, {key: 'Czech Republic', value: 'Czechy'}, {key: 'Denmark', value: 'Dania'}, {key: 'Finland', value: 'Finlandia'}, {key: 'France', value: 'Francja'}, {key: 'Germany', value: 'Niemcy'},{key: 'Greece', value: 'Grecja'}, {key: 'Hong Kong', value: 'Hongkong'}, {key: 'Hungary', value: 'Węgry'}, {key: 'Iceland', value: 'Islandia'}, {key: 'India', value: 'Indie'}, {key: 'Iran', value: 'Iran'}, {key: 'Ireland', value: 'Irlandia'}, {key: 'Italy', value: 'Włochy'}, {key: 'Japan', value: 'Japonia'}, {key: 'Malaysia', value: 'Malezja'},{key: 'Mexico', value: 'Meksyk'}, {key: 'Netherlands', value: 'Holandia'}, {key: 'New Zealand', value: 'Nowa Zelandia'}, {key: 'Pakistan', value: 'Pakistan'}, {key: 'Poland', value: 'Polska'}, {key: 'Portugal', value: 'Portugalia'}, {key: 'Romania', value: 'Rumunia'}, {key: 'Russia', value: 'Rosja'}, {key: 'Singapore', value: 'Singapur'}, {key: 'South Africa', value: 'RPA'},{key: 'Spain', value: 'Hiszpania'}, {key: 'Sweden', value: 'Szwecja'}, {key: 'Switzerland', value: 'Szwajcaria'}, {key: 'Thailand', value: 'Tajlandia'}, {key: 'United Kingdom', value: 'Wielka Brytania'}, {key: 'United States', value: 'USA'}];
 
 /**
  * Create a FilmUrl
@@ -98,6 +100,7 @@ exports.create = function(req, res) {
     filmUrlList.forEach(function(value){
       findImdb(req,value.link);
     });
+    findImdb(req,'http://www.imdb.com/title/tt0068646/');
   }
   if(req.body.filmweb){
    /* console.log('zbieraj z filmweb');
@@ -106,7 +109,7 @@ exports.create = function(req, res) {
     filmUrlListFilmweb.forEach(function(value){
       findFilmweb(req,value.link);
     });*/
-    //findFilmweb(req,'http://www.filmweb.pl/Jak.Rozpetalem.Druga.Wojne.Swiatowa');
+    findFilmweb(req,'http://www.filmweb.pl/Jak.Rozpetalem.Druga.Wojne.Swiatowa');
   }
   if(req.body.filmaster){
     console.log('zbieraj z filmaster');
@@ -462,7 +465,7 @@ function arrayUnique(array) {
 
   return a;
 }
-function dictionary(){
+function genreDictionary(input){
   var dictionary = [{key:"key", value:"value"}];
   dictionary.push({key: 'Action', value: 'Akcja'});
   dictionary.push({key: 'Adventure', value: 'Przygodowy'});
@@ -479,7 +482,7 @@ function dictionary(){
   dictionary.push({key: 'Horror', value: 'Horror'});
   dictionary.push({key: 'Music', value: 'Muzyczny'});
   dictionary.push({key: 'Musical', value: 'Musical'});
-  dictionary.push({key: 'Mystery', value: ''});
+  dictionary.push({key: 'Mystery', value: 'Baśń'});
   dictionary.push({key: 'Romance', value: 'Romans'});
   dictionary.push({key: 'Sci-Fi', value: 'Sci-Fi'});
   dictionary.push({key: 'Sport', value: 'Sportowy'});
