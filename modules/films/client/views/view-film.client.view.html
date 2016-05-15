@@ -23,22 +23,26 @@
       <img src="modules/core/client/img/brand/star.png" alt="{{vm.film.title}}" title="{{vm.film.title}}" width="30" height="30" >
       <em><b>{{vm.film.ratingFilmaster}}</b></em></center>
     </div>
-    <div class="col-md-6">
-      </br></br><span>Reżyser: </span>
-      <b><span data-ng-repeat="director in vm.film.director" ng-bind="director">
-      </span> <span ng-repeat-end></span></br></br></b>
-      <span>Kraj: </span>
-      <b><span data-ng-repeat="country in vm.film.country" ng-bind="country">
-      </span> <span ng-repeat-end></span></br></br></b>
-      <p>Aktorzy: </p>
-      <b><div data-ng-repeat="star in vm.film.cast" ng-bind="star"> <span ng-repeat-end></span></br>
-      </div></b>
-    </div>
-    <div class="col-md-6">
-      </br></br><div data-ng-if="vm.film.won != '0'">
-        <span>Zdobyte nagrody: <b>{{vm.film.won}}</b></span>
-        <div data-ng-if="vm.film.nominations !='0'">
-          <span>Nominacje: <b>{{vm.film.nominations }}</b></span>
+  </div>
+  <div clas="col-md-10">
+      <div class="col-md-5">
+        </br></br><span>Reżyser: </span>
+        <b><span ng-repeat-start="director in vm.film.director" ng-bind="director">
+        </span>, <span ng-repeat-end></span></br></br></b>
+        <span>Kraj: </span>
+        <b><span ng-repeat-start="country in vm.film.country" ng-bind="country">
+        </span>, <span ng-repeat-end></span></br></br></b>
+        <span>Rodzaj:</span>
+        <b><span ng-repeat-start="type in vm.film.type" ng-bind="type"></span>, <span ng-repeat-end></span></br></br></b>
+        <p>Aktorzy:</p>
+        <b><div data-ng-repeat="star in vm.film.cast" ng-bind="star"></br></div></b>
+      </div>
+      <div class="col-md-5">
+        </br></br><div data-ng-if="vm.film.won != '0'">
+          <span>Zdobyte nagrody: <b>{{vm.film.won}}</b></span>
+          <div data-ng-if="vm.film.nominations !='0'">
+            <span>Nominacje: <b>{{vm.film.nominations }}</b></span>
+          </div>
         </div>
       </div>
     </div>

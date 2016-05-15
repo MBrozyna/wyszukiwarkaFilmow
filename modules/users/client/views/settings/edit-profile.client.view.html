@@ -3,39 +3,39 @@
     <form name="userForm" ng-submit="updateUserProfile(userForm.$valid)" class="signin" novalidate autocomplete="off">
       <fieldset>
         <div class="form-group" show-errors>
-          <label for="firstName">First Name</label>
+          <label for="firstName">Imię</label>
           <input type="text" id="firstName" name="firstName" class="form-control" ng-model="user.firstName" placeholder="First Name" required>
           <div ng-messages="userForm.firstName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">First name is required.</p>
+            <p class="help-block error-text" ng-message="required">Imię wymagane!</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="lastName">Last Name</label>
+          <label for="lastName">Nazwisko</label>
           <input type="text" id="lastName" name="lastName" class="form-control" ng-model="user.lastName" placeholder="Last Name" required>
           <div ng-messages="userForm.lastName.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Last name is required.</p>
+            <p class="help-block error-text" ng-message="required">Nazwisko wymagane!</p>
           </div>
         </div>
         <div class="form-group" show-errors>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" class="form-control" ng-model="user.email" placeholder="Email" lowercase required>
           <div ng-messages="userForm.email.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Email address is required.</p>
-            <p class="help-block error-text" ng-message="email">Email address is invalid.</p>
+            <p class="help-block error-text" ng-message="required">Adres email wymagany</p>
+            <p class="help-block error-text" ng-message="email">Niepoprawny adres email</p>
           </div>
         </div>
         <div class="form-group" show-errors>
-          <label for="username">Username</label>
+          <label for="username">Login</label>
           <input type="text" id="username" name="username" class="form-control" ng-model="user.username" placeholder="Username" lowercase required>
           <div ng-messages="userForm.username.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Username is required.</p>
+            <p class="help-block error-text" ng-message="required">Login wymagany</p>
           </div>
         </div>
         <div class="text-center form-group">
-          <button type="submit" class="btn btn-primary">Save Profile</button>
+          <button type="submit" class="btn btn-primary">Zapisz</button>
         </div>
         <div ng-show="success" class="text-center text-success">
-          <strong>Profile Saved Successfully</strong>
+          <strong>Zapisano poprawnie</strong>
         </div>
         <div ng-show="error" class="text-center text-danger">
           <strong ng-bind="error"></strong>

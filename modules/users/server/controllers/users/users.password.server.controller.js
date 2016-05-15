@@ -51,7 +51,7 @@ exports.forgot = function (req, res, next) {
         });
       } else {
         return res.status(400).send({
-          message: 'Username field must not be blank'
+          message: 'Pole login nie może być puste!'
         });
       }
     },
@@ -80,11 +80,11 @@ exports.forgot = function (req, res, next) {
       smtpTransport.sendMail(mailOptions, function (err) {
         if (!err) {
           res.send({
-            message: 'An email has been sent to the provided email with further instructions.'
+            message: 'Wysłano email z dalszymi informacjami.'
           });
         } else {
           return res.status(400).send({
-            message: 'Failure sending email'
+            message: 'Błąd podczas wysyłania wiadomości.'
           });
         }
 
@@ -162,7 +162,7 @@ exports.reset = function (req, res, next) {
             });
           } else {
             return res.status(400).send({
-              message: 'Passwords do not match'
+              message: 'Hasła nie zgadzają się'
             });
           }
         } else {
@@ -185,7 +185,7 @@ exports.reset = function (req, res, next) {
       var mailOptions = {
         to: user.email,
         from: config.mailer.from,
-        subject: 'Your password has been changed',
+        subject: 'Twoje hasło zostało zmienione',
         html: emailHTML
       };
 
@@ -227,7 +227,7 @@ exports.changePassword = function (req, res, next) {
                       res.status(400).send(err);
                     } else {
                       res.send({
-                        message: 'Password changed successfully'
+                        message: 'Poprawnie zmieniono hasło'
                       });
                     }
                   });
@@ -235,17 +235,17 @@ exports.changePassword = function (req, res, next) {
               });
             } else {
               res.status(400).send({
-                message: 'Passwords do not match'
+                message: 'Hasła nie zgadzają się'
               });
             }
           } else {
             res.status(400).send({
-              message: 'Current password is incorrect'
+              message: 'Obecne hasło jest niepoprawne'
             });
           }
         } else {
           res.status(400).send({
-            message: 'User is not found'
+            message: 'Nie znaleziono użytkownika'
           });
         }
       });
@@ -256,7 +256,7 @@ exports.changePassword = function (req, res, next) {
     }
   } else {
     res.status(400).send({
-      message: 'User is not signed in'
+      message: 'Użytkownik nie jest zalogowany.'
     });
   }
 };

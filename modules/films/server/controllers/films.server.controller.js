@@ -14,7 +14,8 @@ var path = require('path'),
   _ = require('lodash'),
   siteMapFinderImdbFlag = false,
   siteMapFinderFilmwebFlag = false,
-  siteMapFinderFilmasterFlag = false;
+  siteMapFinderFilmasterFlag = false,
+  updateFlag = false;
 
 /**
  * Create a FilmUrl
@@ -99,12 +100,12 @@ exports.create = function(req, res) {
     });
   }
   if(req.body.filmweb){
-    console.log('zbieraj z filmweb');
+   /* console.log('zbieraj z filmweb');
     var filmUrlListFilmweb = siteMapFinderFilmweb();
     while(!siteMapFinderFilmwebFlag){require('deasync').sleep(100);}
     filmUrlListFilmweb.forEach(function(value){
       findFilmweb(req,value.link);
-    });
+    });*/
     //findFilmweb(req,'http://www.filmweb.pl/Jak.Rozpetalem.Druga.Wojne.Swiatowa');
   }
   if(req.body.filmaster){
@@ -194,7 +195,7 @@ exports.create = function(req, res) {
           film.release = release.substring(1, release.length - 2);
         });
         $('.s-42').filter(function () {
-          film.ratingFilmweb = $(this).children().first().text();
+          film.ratingFilmweb = $(this).children().first().text().trim();
         });
         $('.genresList li').filter(function () {
           var value = $(this);
@@ -267,7 +268,12 @@ exports.create = function(req, res) {
     console.log(suma);
     while(!awardsFlag){require('deasync').sleep(100);}
     while(!defaultFlag){require('deasync').sleep(100);}
-    return save(film);
+    if(false){
+      return save(film);
+    }
+    else{
+      update(res, film, Film);
+    }
   }
   function save(film){
     film.save(function(err) {
@@ -283,6 +289,52 @@ exports.create = function(req, res) {
     });
   }
 };
+function update(res, film, Film){
+  Film.find({title: film.title}, {release: film.release}).exec(function(err, filmFound) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    else if(filmFound.length === 0){
+      film.save(function (err) {
+        if(err) {
+          console.error('ERROR!');
+        }
+      });
+    }
+    else if(filmFound.length === 1){
+      var filmToUpdate = filmFound[0];
+      if(film.ratingFilmaster !== '0'){
+        filmToUpdate.ratingFilmaster = film.ratingFilmaster;
+      }
+      if(film.ratingFilmweb !== '0'){
+        //filmFound.ratingFilmweb = film.ratingFilmweb;
+        filmToUpdate.ratingFilmweb = '7.0';
+      }
+      if(film.ratingImdb !== '0'){
+        filmToUpdate.ratingImdb = film.ratingImdb;
+      }
+      if(film.duration !== '' && filmToUpdate.duration === ''){
+        filmToUpdate.duration = film.duration;
+      }
+      if(film.description !== '' && filmToUpdate.description === ''){
+        filmToUpdate.description = film.description;
+      }
+      if(film.img !== '' && filmToUpdate.img === ''){
+        filmToUpdate.img = film.img;
+      }
+      filmToUpdate.cast = _.union(film.cast, filmToUpdate.cast);
+      filmToUpdate.director = _.union(film.director, filmToUpdate.director);
+
+      filmToUpdate.save(function (err) {
+        if(err) {
+          console.error('ERROR!');
+        }
+      });
+    }
+  });
+}
 
 /**
  * Show the current Film
@@ -313,7 +365,7 @@ exports.update = function(req, res) {
     } else {
       res.jsonp(film);
     }
-  });
+});
 };
 
 /**
@@ -347,7 +399,7 @@ exports.list = function(req, res) {
     }
   });
 };
-exports.countryList = function(req, res){
+/*exports.countryList = function(req, res){
   console.log('started country list exports');
   Film.find().distinct('type').exec(function(err, films) {
     if (err) {
@@ -358,6 +410,19 @@ exports.countryList = function(req, res){
       res.jsonp(films);
     }
   });
+};*/
+
+exports.filmByTitleAndYear = function(req,res,film){
+  Film.find({title: film.title}).exec(function(err,filmFound){
+    if (err){
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      console.log(filmFound);
+      return filmFound;
+    }
+  })
 };
 
 /**
@@ -383,3 +448,44 @@ exports.filmByID = function(req, res, next, id) {
   });
 
 };
+//helpers
+function arrayUnique(array) {
+  var a = array.concat();
+  for(var i=0; i<a.length; ++i) {
+    for(var j=i+1; j<a.length; ++j) {
+      if(typeof a[i] !== 'undefined' && typeof a[j] !== 'undefined'){
+        if(a[i] === a[j])
+          a.splice(j--, 1);
+      }
+    }
+  }
+
+  return a;
+}
+function dictionary(){
+  var dictionary = [{key:"key", value:"value"}];
+  dictionary.push({key: 'Action', value: 'Akcja'});
+  dictionary.push({key: 'Adventure', value: 'Przygodowy'});
+  dictionary.push({key: 'Animation', value: 'Animacja'});
+  dictionary.push({key: 'Biography', value: 'Biograficzny'});
+  dictionary.push({key: 'Comedy', value: 'Komedia'});
+  dictionary.push({key: 'Crime', value: 'Gangsterski'});
+  dictionary.push({key: 'Documentary', value: 'Dokumentalny'});
+  dictionary.push({key: 'Drama', value: 'Dramat'});
+  dictionary.push({key: 'Family', value: 'Familijny'});
+  dictionary.push({key: 'Fantasy', value: 'Fantasy'});
+  dictionary.push({key: 'Film-Noir', value: 'Film-Noir'});
+  dictionary.push({key: 'History', value: 'Historyczny'});
+  dictionary.push({key: 'Horror', value: 'Horror'});
+  dictionary.push({key: 'Music', value: 'Muzyczny'});
+  dictionary.push({key: 'Musical', value: 'Musical'});
+  dictionary.push({key: 'Mystery', value: ''});
+  dictionary.push({key: 'Romance', value: 'Romans'});
+  dictionary.push({key: 'Sci-Fi', value: 'Sci-Fi'});
+  dictionary.push({key: 'Sport', value: 'Sportowy'});
+  dictionary.push({key: 'Thriller', value: 'Thriller'});
+  dictionary.push({key: 'War', value: 'Wojenny'});
+  dictionary.push({key: 'Western', value: 'Western'});
+
+
+}

@@ -66,7 +66,7 @@ exports.changeProfilePicture = function (req, res) {
     upload(req, res, function (uploadError) {
       if(uploadError) {
         return res.status(400).send({
-          message: 'Error occurred while uploading profile picture'
+          message: 'Błąd podczas dodawania zdjęcia.'
         });
       } else {
         user.profileImageURL = config.uploads.profileUpload.dest + req.file.filename;
