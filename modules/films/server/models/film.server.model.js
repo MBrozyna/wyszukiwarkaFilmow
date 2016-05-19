@@ -14,6 +14,10 @@ var FilmSchema = new Schema({
     type: String,
     default: ''
   },
+  originalTitle : {
+    type: String,
+    default: ''
+  },
   release : {
     type: String,
     default: ''

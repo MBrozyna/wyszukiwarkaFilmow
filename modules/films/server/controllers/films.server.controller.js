@@ -16,8 +16,8 @@ var path = require('path'),
   siteMapFinderFilmwebFlag = false,
   siteMapFinderFilmasterFlag = false,
   updateFlag = false,
-  genreDictionary = [{key: 'Action', value: 'Akcja'}, {key: 'Adventure', value: 'Przygodowy'}, {key: 'Animation', value: 'Animacja'}, {key: 'Biography', value: 'Biograficzny'}, {key: 'Comedy', value: 'Komedia'}, {key: 'Crime', value: 'Gangsterski'}, {key: 'Documentary', value: 'Dokumentalny'}, {key: 'Drama', value: 'Dramat'}, {key: 'Family', value: 'Familijny'}, {key: 'Fantasy', value: 'Fantasy'}, {key: 'Film-Noir', value: 'Film-Noir'}, {key: 'History', value: 'Historyczny'}, {key: 'Horror', value: 'Horror'}, {key: 'Music', value: 'Muzyczny'}, {key: 'Musical', value: 'Musical'}, {key: 'Mystery', value: 'Baśń'}, {key: 'Romance', value: 'Romans'}, {key: 'Sci-Fi', value: 'Sci-Fi'}, {key: 'Sport', value: 'Sportowy'}, {key: 'Thriller', value: 'Thriller'}, {key: 'War', value: 'Wojenny'}, {key: 'Western', value: 'Western'}],
-  countriesDictionary = [{key: 'Argentina', value: 'Argentyna'}, {key: 'Australia', value: 'Australia'}, {key: 'Austria', value: 'Austria'}, {key: 'Belgium', value: 'Belgia'}, {key: 'Brazil', value: 'Brazylia'},{key: 'Bulgaria', value: 'Bułgaria'}, {key: 'Canada', value: 'Kanada'}, {key: 'China', value: 'Chiny'}, {key: 'Colombia', value: 'Kolumbia'},{key: 'Costa Rica', value: 'Kostaryka'}, {key: 'Czech Republic', value: 'Czechy'}, {key: 'Denmark', value: 'Dania'}, {key: 'Finland', value: 'Finlandia'}, {key: 'France', value: 'Francja'}, {key: 'Germany', value: 'Niemcy'},{key: 'Greece', value: 'Grecja'}, {key: 'Hong Kong', value: 'Hongkong'}, {key: 'Hungary', value: 'Węgry'}, {key: 'Iceland', value: 'Islandia'}, {key: 'India', value: 'Indie'}, {key: 'Iran', value: 'Iran'}, {key: 'Ireland', value: 'Irlandia'}, {key: 'Italy', value: 'Włochy'}, {key: 'Japan', value: 'Japonia'}, {key: 'Malaysia', value: 'Malezja'},{key: 'Mexico', value: 'Meksyk'}, {key: 'Netherlands', value: 'Holandia'}, {key: 'New Zealand', value: 'Nowa Zelandia'}, {key: 'Pakistan', value: 'Pakistan'}, {key: 'Poland', value: 'Polska'}, {key: 'Portugal', value: 'Portugalia'}, {key: 'Romania', value: 'Rumunia'}, {key: 'Russia', value: 'Rosja'}, {key: 'Singapore', value: 'Singapur'}, {key: 'South Africa', value: 'RPA'},{key: 'Spain', value: 'Hiszpania'}, {key: 'Sweden', value: 'Szwecja'}, {key: 'Switzerland', value: 'Szwajcaria'}, {key: 'Thailand', value: 'Tajlandia'}, {key: 'United Kingdom', value: 'Wielka Brytania'}, {key: 'United States', value: 'USA'}];
+  genreDictionary = [{ key: 'Action', value: 'Akcja' }, { key: 'Adventure', value: 'Przygodowy' }, { key: 'Animation', value: 'Animacja' }, { key: 'Biography', value: 'Biograficzny' }, { key: 'Comedy', value: 'Komedia' }, { key: 'Crime', value: 'Gangsterski' }, { key: 'Documentary', value: 'Dokumentalny' }, { key: 'Drama', value: 'Dramat' }, { key: 'Family', value: 'Familijny' }, { key: 'Fantasy', value: 'Fantasy' }, { key: 'Film-Noir', value: 'Film-Noir' }, { key: 'History', value: 'Historyczny' }, { key: 'Horror', value: 'Horror' }, { key: 'Music', value: 'Muzyczny' }, { key: 'Musical', value: 'Musical' }, { key: 'Mystery', value: 'Baśń' }, { key: 'Romance', value: 'Romans' }, { key: 'Sci-Fi', value: 'Sci-Fi' }, { key: 'Sport', value: 'Sportowy' }, { key: 'Thriller', value: 'Thriller' }, { key: 'War', value: 'Wojenny' }, { key: 'Western', value: 'Western' }],
+  countriesDictionary = [{ key: 'Argentina', value: 'Argentyna' }, { key: 'Australia', value: 'Australia' }, { key: 'Austria', value: 'Austria' }, { key: 'Belgium', value: 'Belgia' }, { key: 'Brazil', value: 'Brazylia' },{ key: 'Bulgaria', value: 'Bułgaria' }, { key: 'Canada', value: 'Kanada' }, { key: 'China', value: 'Chiny' }, { key: 'Colombia', value: 'Kolumbia' },{ key: 'Costa Rica', value: 'Kostaryka' }, { key: 'Czech Republic', value: 'Czechy' }, { key: 'Denmark', value: 'Dania' }, { key: 'Finland', value: 'Finlandia' }, { key: 'France', value: 'Francja' }, { key: 'Germany', value: 'Niemcy' },{ key: 'Greece', value: 'Grecja' }, { key: 'Hong Kong', value: 'Hongkong' }, { key: 'Hungary', value: 'Węgry' }, { key: 'Iceland', value: 'Islandia' }, { key: 'India', value: 'Indie' }, { key: 'Iran', value: 'Iran' }, { key: 'Ireland', value: 'Irlandia' }, { key: 'Italy', value: 'Włochy' }, { key: 'Japan', value: 'Japonia' }, { key: 'Malaysia', value: 'Malezja' },{ key: 'Mexico', value: 'Meksyk' }, { key: 'Netherlands', value: 'Holandia' } , { key: 'New Zealand', value: 'Nowa Zelandia' }, { key: 'Pakistan', value: 'Pakistan' }, { key: 'Poland', value: 'Polska' }, { key: 'Portugal', value: 'Portugalia' }, { key: 'Romania', value: 'Rumunia' }, { key: 'Russia', value: 'Rosja' }, { key: 'Singapore', value: 'Singapur' }, { key: 'South Africa', value: 'RPA' },{ key: 'Spain', value: 'Hiszpania' }, { key: 'Sweden', value: 'Szwecja' }, { key: 'Switzerland', value: 'Szwajcaria' }, { key: 'Thailand', value: 'Tajlandia' }, { key: 'United Kingdom', value: 'Wielka Brytania' }, { key: 'United States', value: 'USA' }];
 
 /**
  * Create a FilmUrl
@@ -52,10 +52,9 @@ function siteMapFinderImdb(){
         }
       });
     }
-    siteMapFinderImdbFlag = true;
   });
   while(filmUrlList.length !== 500){require('deasync').sleep(100);}
-  console.log(filmUrlList.length);
+  siteMapFinderImdbFlag = true;
   return filmUrlList;
 }
 function siteMapFinderFilmweb(){
@@ -79,11 +78,33 @@ function siteMapFinderFilmweb(){
   }
   siteMapFinderFilmwebFlag = true;
   while(filmUrlList.length !== (urlList.length * 10)){require('deasync').sleep(100);}
-  console.log(filmUrlList.length);
   return filmUrlList;
 }
 function siteMapFinderFimaster(){
-
+  var urlList = filmasterLinkGenerator();
+  var filmUrlList = [];
+  for(var i=0;i<urlList.length;i++){
+    /*jshint loopfunc: true */
+    request(urlList[i],function (error, response, html) {
+      if (!error && response.statusCode === 200) {
+        var $ = cheerio.load(html);
+        $('.t').filter(function () {
+          filmUrlList.push($(this).attr('href'));
+        });
+      }
+    });
+  }
+  siteMapFinderFilmasterFlag = true;
+  while(filmUrlList.length !== (urlList.length * 10)){require('deasync').sleep(100);}
+  return filmUrlList;
+}
+function filmasterLinkGenerator(){
+  var url = 'http://filmaster.pl/rankingi/?page=';
+  var urlLink = [];
+  for(var i=1;i<78;i++){
+    urlLink.push(url + i.toString());
+  }
+  return urlLink;
 }
 function filmwebLinkGenerator(){
   var url = 'http://www.filmweb.pl/search/film?q=&type=&startYear=&endYear=&countryIds=&genreIds=&startRate=&endRate=&startCount=&endCount=&sort=COUNT&sortAscending=false&c=portal&page=';
@@ -94,33 +115,30 @@ function filmwebLinkGenerator(){
   return urlLink;
 }
 exports.create = function(req, res) {
+
+  var addedImdbFlag = false;
+
   if(req.body.imdb){
     var filmUrlList = siteMapFinderImdb();
     while(!siteMapFinderImdbFlag){require('deasync').sleep(100);}
     filmUrlList.forEach(function(value){
       findImdb(req,value.link);
     });
-    findImdb(req,'http://www.imdb.com/title/tt0068646/');
   }
   if(req.body.filmweb){
-   /* console.log('zbieraj z filmweb');
     var filmUrlListFilmweb = siteMapFinderFilmweb();
     while(!siteMapFinderFilmwebFlag){require('deasync').sleep(100);}
     filmUrlListFilmweb.forEach(function(value){
       findFilmweb(req,value.link);
-    });*/
-    findFilmweb(req,'http://www.filmweb.pl/Jak.Rozpetalem.Druga.Wojne.Swiatowa');
+    });
   }
   if(req.body.filmaster){
-    console.log('zbieraj z filmaster');
     var filmUrlListFilmaster = siteMapFinderFimaster();
+    while(!siteMapFinderFilmasterFlag){require('deasync').sleep(100);}
+    filmUrlListFilmaster.forEach(function(value){
+      findFilmaster(req,value.link);
+    });
   }
-  var counter = 0;
-  var saveCounter = 0;
-  var errorCounter = 0;
-
-
-
 
   function findImdb (req,url) {
     console.log('Started imdb function. ' + url);
@@ -128,7 +146,6 @@ exports.create = function(req, res) {
     request(String(url), function (error, response, html) {
       console.log('Started request: ' + url);
       if (!error && response.statusCode === 200) {
-        console.log('Without error code');
         var $ = cheerio.load(html);
         $('.title_wrapper').filter(function () {
           var title = $(this).children().first().text();
@@ -136,20 +153,21 @@ exports.create = function(req, res) {
           title = title.substring(0, title.length - 7);
           film.title = title;
         });
+        $('.originalTitle').filter(function () {
+          var originalTitle = $(this).text();
+          film.originalTitle = originalTitle.substring(0,originalTitle.length-17);
+        });
         $('#titleYear').filter(function () {
           film.release = $(this).children().first().text();
         });
         $('.ratingValue').filter(function () {
-          film.rating = $(this).children().first().text();
+          film.ratingImdb = $(this).children().first().text();
         });
         $('.subtext span[itemprop="genre"]').filter(function () {
           film.type.push($(this).text());
         });
         $('#titleDetails').find('.txt-block time[itemprop="duration"]').filter(function () {
           film.duration = $(this).text();
-        });
-        $('#titleAwardsRanks').find('span[itemprop="awards"] b').filter(function () {
-          //film.won = $(this).text();
         });
         $('.credit_summary_item span[itemprop="director"] span[itemprop="name"]').filter(function () {
           film.director = $(this).text();
@@ -158,24 +176,20 @@ exports.create = function(req, res) {
           film.cast.push($(this).text());
         });
         $('#titleDetails').find('a[href*="country"]').filter(function () {
-          film.country = $(this).text();
+          film.country.push($(this).text());
         });
-        film.baseSite = 'imdb.com';
-        counter++;
-        var suma = counter + errorCounter;
-        console.log(suma);
-        return save(film);
+        if (film.originalTitle === '') {
+          film.originalTitle = film.title;
+        }
+        addedImdbFlag = true;
       }
       else {
-        errorCounter++;
-        console.log('Błąd: ' + error);
-        console.log('Counter: ' + counter);
-        console.log('SaveCounter: ' + saveCounter);
-        console.log('ErrorCounter: '+ errorCounter);
-        findImdb (req,url);
+        findImdb(req, url);
       }
-
     });
+    while(!addedImdbFlag){require('deasync').sleep(100);}
+    addedImdbFlag = false;
+    update(res, film, Film);
   }
 
   function findFilmweb(req,url){
@@ -186,13 +200,16 @@ exports.create = function(req, res) {
     request(String(url), function (error, response, html) {
       console.log('Started request: ' + url);
       if (!error && response.statusCode === 200) {
-        console.log('Without error code');
         var $ = cheerio.load(html);
         $('.inline').find('a[property="v:name"]').filter(function () {
           var title = $(this).text();
           film.title = title;
           console.log(title);
         });
+        $('.filmMainHeader').children().find('h2').first().filter(function () {
+          film.originalTitle = $(this).text();
+        });
+
         $('.halfSize').filter(function () {
           var release = $(this).first().text();
           film.release = release.substring(1, release.length - 2);
@@ -217,6 +234,9 @@ exports.create = function(req, res) {
         $('.filmPlot').filter(function () {
           film.description = $(this).children().text();
         });
+        if(film.originalTitle === ''){
+          film.originalTitle = ogiginalTitleReplace(film.title);
+        }
         $('.filmCast').children().find('a[rel="v:starring"]').filter(function () {
           film.cast.push($(this).text());
         });
@@ -226,11 +246,6 @@ exports.create = function(req, res) {
         defaultFlag =true;
       }
       else {
-        errorCounter++;
-        console.log('Błąd: ' + error);
-        console.log('Counter: ' + counter);
-        console.log('SaveCounter: ' + saveCounter);
-        console.log('ErrorCounter: ' + errorCounter);
         findFilmweb(req, url);
       }
     });
@@ -258,29 +273,15 @@ exports.create = function(req, res) {
         });
       }
       else {
-        errorCounter++;
-        console.log('Błąd: ' + error);
-        console.log('Counter: ' + counter);
-        console.log('SaveCounter: ' + saveCounter);
-        console.log('ErrorCounter: ' + errorCounter);
         findFilmweb(req, url);
       }
     });
-    counter++;
-    var suma = counter + errorCounter;
-    console.log(suma);
     while(!awardsFlag){require('deasync').sleep(100);}
     while(!defaultFlag){require('deasync').sleep(100);}
-    if(false){
-      return save(film);
-    }
-    else{
-      update(res, film, Film);
-    }
+    update(res, film, Film);
   }
   function save(film){
     film.save(function(err) {
-      saveCounter++;
       if (err) {
         console.log(film);
         return res.status(400).send({
@@ -293,7 +294,8 @@ exports.create = function(req, res) {
   }
 };
 function update(res, film, Film){
-  Film.find({title: film.title}, {release: film.release}).exec(function(err, filmFound) {
+  console.log(film.title + ', ' + film.release);
+  Film.find({ title: film.title }, { release: film.release }).exec(function(err, filmFound) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -313,12 +315,12 @@ function update(res, film, Film){
       }
       if(film.ratingFilmweb !== '0'){
         //filmFound.ratingFilmweb = film.ratingFilmweb;
-        filmToUpdate.ratingFilmweb = '7.0';
+        filmToUpdate.ratingFilmweb = film.ratingFilmweb;
       }
       if(film.ratingImdb !== '0'){
         filmToUpdate.ratingImdb = film.ratingImdb;
       }
-      if(film.duration !== '' && filmToUpdate.duration === ''){
+      if(film.duration !== '' && typeof filmToUpdate.duration === 'undefined'){
         filmToUpdate.duration = film.duration;
       }
       if(film.description !== '' && filmToUpdate.description === ''){
@@ -329,6 +331,21 @@ function update(res, film, Film){
       }
       filmToUpdate.cast = _.union(film.cast, filmToUpdate.cast);
       filmToUpdate.director = _.union(film.director, filmToUpdate.director);
+
+      for(var i =0; i<film.type.length; i++){
+        var typ = findInDictionary(genreDictionary,film.type[i]);
+        if(typeof typ !== 'undefined'){
+          film.type[i] = typ;
+        }
+      }
+      filmToUpdate.type = _.union(film.type, filmToUpdate.type);
+      for(var j=0; j<film.country.length; j++){
+        var kraj = findInDictionary(countriesDictionary, film.country[j]);
+        if(typeof kraj !== 'undefined'){
+          film.country[j] = kraj;
+        }
+      }
+      filmToUpdate.country = _.union(film.country, filmToUpdate.country);
 
       filmToUpdate.save(function (err) {
         if(err) {
@@ -368,7 +385,7 @@ exports.update = function(req, res) {
     } else {
       res.jsonp(film);
     }
-});
+  });
 };
 
 /**
@@ -402,21 +419,9 @@ exports.list = function(req, res) {
     }
   });
 };
-/*exports.countryList = function(req, res){
-  console.log('started country list exports');
-  Film.find().distinct('type').exec(function(err, films) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(films);
-    }
-  });
-};*/
 
 exports.filmByTitleAndYear = function(req,res,film){
-  Film.find({title: film.title}).exec(function(err,filmFound){
+  Film.find({ title: film.title }).exec(function(err,filmFound){
     if (err){
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
@@ -425,7 +430,7 @@ exports.filmByTitleAndYear = function(req,res,film){
       console.log(filmFound);
       return filmFound;
     }
-  })
+  });
 };
 
 /**
@@ -462,33 +467,25 @@ function arrayUnique(array) {
       }
     }
   }
-
   return a;
 }
-function genreDictionary(input){
-  var dictionary = [{key:"key", value:"value"}];
-  dictionary.push({key: 'Action', value: 'Akcja'});
-  dictionary.push({key: 'Adventure', value: 'Przygodowy'});
-  dictionary.push({key: 'Animation', value: 'Animacja'});
-  dictionary.push({key: 'Biography', value: 'Biograficzny'});
-  dictionary.push({key: 'Comedy', value: 'Komedia'});
-  dictionary.push({key: 'Crime', value: 'Gangsterski'});
-  dictionary.push({key: 'Documentary', value: 'Dokumentalny'});
-  dictionary.push({key: 'Drama', value: 'Dramat'});
-  dictionary.push({key: 'Family', value: 'Familijny'});
-  dictionary.push({key: 'Fantasy', value: 'Fantasy'});
-  dictionary.push({key: 'Film-Noir', value: 'Film-Noir'});
-  dictionary.push({key: 'History', value: 'Historyczny'});
-  dictionary.push({key: 'Horror', value: 'Horror'});
-  dictionary.push({key: 'Music', value: 'Muzyczny'});
-  dictionary.push({key: 'Musical', value: 'Musical'});
-  dictionary.push({key: 'Mystery', value: 'Baśń'});
-  dictionary.push({key: 'Romance', value: 'Romans'});
-  dictionary.push({key: 'Sci-Fi', value: 'Sci-Fi'});
-  dictionary.push({key: 'Sport', value: 'Sportowy'});
-  dictionary.push({key: 'Thriller', value: 'Thriller'});
-  dictionary.push({key: 'War', value: 'Wojenny'});
-  dictionary.push({key: 'Western', value: 'Western'});
-
-
+function findInDictionary(dict,key){
+  var value;
+  dict.forEach(function(record){
+    if(key === record.key){
+      value = record.value;
+    }
+  });
+  return value;
+}
+function ogiginalTitleReplace(string){
+  var replace0 = string.replace(/ą/g,"a");
+  var replace1 = replace0.replace(/ę/g, "e");
+  var replace2 = replace1.replace(/ż/g, "z");
+  var replace3 = replace2.replace(/ć/g, "c");
+  var replace4 = replace3.replace(/ł/g, "l");
+  var replace5 = replace4.replace(/ś/g, "s");
+  var replace6 = replace5.replace(/ń/g, "n");
+  var replace7 = replace6.replace(/ź/g, "z");
+  return replace7;
 }
