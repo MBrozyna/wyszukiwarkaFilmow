@@ -2,7 +2,7 @@
   <div class="jumbotron text-center">
     <div class="row">
       <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
-        <img alt="MEAN.JS" class="img-responsive text-center" src="modules/core/client/img/brand/logo.png" />
+        <img alt="Wyszukiwarka filmowa" class="img-responsive text-center" src="modules/core/client/img/brand/logo.png" />
       </div>
     </div>
     <br>
@@ -14,8 +14,7 @@
             <div class="form-group" show-errors>
               <label class="control-label" for="country">Kraj</label>
               <select name="singleSelect" ng-model="vm.film.country" id="country" class="form-control" placeholder="Country" multiple>
-                <option value="option-1">{{vm.film.country}}</option>
-                <option value="option-2">Nie Usa</option>
+                <option value="option-{{coutrywa}}" ng-repeat="country in countries" ng-bind="country"></option>
               </select>
               <label class="control-label" for="director">Reżyser</label>
               <input name="name" type="text" ng-model="vm.film.director" id="director" class="form-control" placeholder="Reżyser" required>
@@ -36,10 +35,9 @@
       <div class="col-md-6">
         <label class="control-label" for="country">Maksymalna długość</label>
         <input name="name" type="text" ng-model="vm.film.duration" id="duration" class="form-control" placeholder="Czas trwania w minutach" required>
-        <label class="control-label" for="country">Typ</label>
+        <label class="control-label" for="type">Typ</label>
         <select name="multipleType" ng-model="vm.film.type" id="type" class="form-control" placeholder="Typ" multiple>
-          <option value="option-1">Dramat</option>
-          <option value="option-2">Nie dramat</option>
+          <option value="option-{{type}}" ng-repeat="type in types" ng-bind="type"></option>
         </select>
         <label class="control-label" for="country">Strona źródłowa</label></br>
         <label>
@@ -84,7 +82,7 @@
       <a target="_blank" href="http://mongodb.org/"> zdjęcie</a>
     </div>
     <div class="col-md-3">
-      <h2><strong>T</strong>ytuł</h2>
+      <h2><strong>T</strong>Tytuł</h2>
       <a target="_blank" href="http://mongodb.org/"> zdjęcie</a>
     </div>
   </div>

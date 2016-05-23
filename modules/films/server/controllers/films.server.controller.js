@@ -17,8 +17,8 @@ var path = require('path'),
   siteMapFinderFilmasterFlag = false,
   updateFlag = false,
   genreDictionary = [{ key: 'Action', value: 'Akcja' }, { key: 'Adventure', value: 'Przygodowy' }, { key: 'Animation', value: 'Animacja' }, { key: 'Biography', value: 'Biograficzny' }, { key: 'Comedy', value: 'Komedia' }, { key: 'Crime', value: 'Gangsterski' }, { key: 'Documentary', value: 'Dokumentalny' }, { key: 'Drama', value: 'Dramat' }, { key: 'Family', value: 'Familijny' }, { key: 'Fantasy', value: 'Fantasy' }, { key: 'Film-Noir', value: 'Film-Noir' }, { key: 'History', value: 'Historyczny' }, { key: 'Horror', value: 'Horror' }, { key: 'Music', value: 'Muzyczny' }, { key: 'Musical', value: 'Musical' }, { key: 'Mystery', value: 'Baśń' }, { key: 'Romance', value: 'Romans' }, { key: 'Sci-Fi', value: 'Sci-Fi' }, { key: 'Sport', value: 'Sportowy' }, { key: 'Thriller', value: 'Thriller' }, { key: 'War', value: 'Wojenny' }, { key: 'Western', value: 'Western' }],
-  countriesDictionary = [{ key: 'Argentina', value: 'Argentyna' }, { key: 'Australia', value: 'Australia' }, { key: 'Austria', value: 'Austria' }, { key: 'Belgium', value: 'Belgia' }, { key: 'Brazil', value: 'Brazylia' },{ key: 'Bulgaria', value: 'Bułgaria' }, { key: 'Canada', value: 'Kanada' }, { key: 'China', value: 'Chiny' }, { key: 'Colombia', value: 'Kolumbia' },{ key: 'Costa Rica', value: 'Kostaryka' }, { key: 'Czech Republic', value: 'Czechy' }, { key: 'Denmark', value: 'Dania' }, { key: 'Finland', value: 'Finlandia' }, { key: 'France', value: 'Francja' }, { key: 'Germany', value: 'Niemcy' },{ key: 'Greece', value: 'Grecja' }, { key: 'Hong Kong', value: 'Hongkong' }, { key: 'Hungary', value: 'Węgry' }, { key: 'Iceland', value: 'Islandia' }, { key: 'India', value: 'Indie' }, { key: 'Iran', value: 'Iran' }, { key: 'Ireland', value: 'Irlandia' }, { key: 'Italy', value: 'Włochy' }, { key: 'Japan', value: 'Japonia' }, { key: 'Malaysia', value: 'Malezja' },{ key: 'Mexico', value: 'Meksyk' }, { key: 'Netherlands', value: 'Holandia' } , { key: 'New Zealand', value: 'Nowa Zelandia' }, { key: 'Pakistan', value: 'Pakistan' }, { key: 'Poland', value: 'Polska' }, { key: 'Portugal', value: 'Portugalia' }, { key: 'Romania', value: 'Rumunia' }, { key: 'Russia', value: 'Rosja' }, { key: 'Singapore', value: 'Singapur' }, { key: 'South Africa', value: 'RPA' },{ key: 'Spain', value: 'Hiszpania' }, { key: 'Sweden', value: 'Szwecja' }, { key: 'Switzerland', value: 'Szwajcaria' }, { key: 'Thailand', value: 'Tajlandia' }, { key: 'United Kingdom', value: 'Wielka Brytania' }, { key: 'United States', value: 'USA' }];
-
+  countriesDictionary = [{ key: 'Argentina', value: 'Argentyna' }, { key: 'Australia', value: 'Australia' }, { key: 'Austria', value: 'Austria' }, { key: 'Belgium', value: 'Belgia' }, { key: 'Brazil', value: 'Brazylia' },{ key: 'Bulgaria', value: 'Bułgaria' }, { key: 'Canada', value: 'Kanada' }, { key: 'China', value: 'Chiny' }, { key: 'Colombia', value: 'Kolumbia' },{ key: 'Costa Rica', value: 'Kostaryka' }, { key: 'Czech Republic', value: 'Czechy' }, { key: 'Denmark', value: 'Dania' }, { key: 'Finland', value: 'Finlandia' }, { key: 'France', value: 'Francja' }, { key: 'Germany', value: 'Niemcy' },{ key: 'Greece', value: 'Grecja' }, { key: 'Hong Kong', value: 'Hongkong' }, { key: 'Hungary', value: 'Węgry' }, { key: 'Iceland', value: 'Islandia' }, { key: 'India', value: 'Indie' }, { key: 'Iran', value: 'Iran' }, { key: 'Ireland', value: 'Irlandia' }, { key: 'Italy', value: 'Włochy' }, { key: 'Japan', value: 'Japonia' }, { key: 'Malaysia', value: 'Malezja' },{ key: 'Mexico', value: 'Meksyk' }, { key: 'Netherlands', value: 'Holandia' } , { key: 'New Zealand', value: 'Nowa Zelandia' }, { key: 'Pakistan', value: 'Pakistan' }, { key: 'Poland', value: 'Polska' }, { key: 'Portugal', value: 'Portugalia' }, { key: 'Romania', value: 'Rumunia' }, { key: 'Russia', value: 'Rosja' }, { key: 'Singapore', value: 'Singapur' }, { key: 'South Africa', value: 'RPA' },{ key: 'Spain', value: 'Hiszpania' }, { key: 'Sweden', value: 'Szwecja' }, { key: 'Switzerland', value: 'Szwajcaria' }, { key: 'Thailand', value: 'Tajlandia' }, { key: 'United Kingdom', value: 'Wielka Brytania' }, { key: 'UK', value: 'Wielka Brytania' }, { key: 'United States', value: 'USA' }, { key: 'Norway', value: 'Norwegia'}, { key: 'Taiwan', value: 'Tajwan'}, { key: 'West Germany', value: 'RFN'}, { key: 'Czechoslovakia', value: 'Czechosłowacja'}, { key: 'Soviet Union', value: 'ZSRR'}, { key: 'South Korea', value: 'Korea Południowa'}, { key: 'Bosnia and Herzegovina', value: 'Bośnia i Hercegowina'}, { key: 'Slovenia', value: 'Słowenia'}, { key: 'Bahamas', value: 'Bahamy'}];
+  //filmasterGenreDirectory['Dramat', 'Komedia', 'Gangsterski', 'Musical', 'Sensacyjny', ''];
 /**
  * Create a FilmUrl
  */
@@ -26,6 +26,7 @@ var path = require('path'),
 function siteMapFinderImdb(){
   var filmUrlList = [];
   var requestFirst =false;
+  var errorCounter = 0;
   var imdbUrl1_250 = 'http://www.imdb.com/list/ls004427773/?start=1&view=compact&sort=user_rating:desc';
   var imdbUrl250_500 = 'http://www.imdb.com/list/ls004427773/?start=251&view=compact&sort=user_rating:desc';
   request(imdbUrl1_250, function (error, response, html) {
@@ -38,6 +39,9 @@ function siteMapFinderImdb(){
           filmUrlList.push(filmUrl);
         }
       });
+    }
+    else{
+      errorCounter++;
     }
     requestFirst=true;
   });
@@ -52,14 +56,19 @@ function siteMapFinderImdb(){
         }
       });
     }
+    else{
+      errorCounter++;
+    }
   });
-  while(filmUrlList.length !== 500){require('deasync').sleep(100);}
+  while(filmUrlList.length + errorCounter !== 500){require('deasync').sleep(100);}
   siteMapFinderImdbFlag = true;
   return filmUrlList;
 }
 function siteMapFinderFilmweb(){
   var urlList = filmwebLinkGenerator();
+  var errorCounter = 0;
   var filmUrlList = [];
+  var linkGenerated =false;
   for(var i=0;i<urlList.length;i++){
     /*jshint loopfunc: true */
     request(urlList[i],function (error, response, html) {
@@ -72,16 +81,20 @@ function siteMapFinderFilmweb(){
             console.log(filmUrl.link);
             filmUrlList.push(filmUrl);
           }
+          else {
+            errorCounter++;
+          }
         });
       }
     });
   }
   siteMapFinderFilmwebFlag = true;
-  while(filmUrlList.length !== (urlList.length * 10)){require('deasync').sleep(100);}
+  while(filmUrlList.length + errorCounter !== (urlList.length * 10)){require('deasync').sleep(100);}
   return filmUrlList;
 }
 function siteMapFinderFimaster(){
   var urlList = filmasterLinkGenerator();
+  var errorCounter =0;
   var filmUrlList = [];
   for(var i=0;i<urlList.length;i++){
     /*jshint loopfunc: true */
@@ -92,10 +105,13 @@ function siteMapFinderFimaster(){
           filmUrlList.push($(this).attr('href'));
         });
       }
+      else {
+        errorCounter++;
+      }
     });
   }
   siteMapFinderFilmasterFlag = true;
-  while(filmUrlList.length !== (urlList.length * 10)){require('deasync').sleep(100);}
+  while(filmUrlList.length + errorCounter !== (urlList.length * 10)){require('deasync').sleep(100);}
   return filmUrlList;
 }
 function filmasterLinkGenerator(){
@@ -131,12 +147,13 @@ exports.create = function(req, res) {
     filmUrlListFilmweb.forEach(function(value){
       findFilmweb(req,value.link);
     });
+    //findFilmweb(req,'http://www.filmweb.pl/Afrykanska.Krolowa');
   }
   if(req.body.filmaster){
     var filmUrlListFilmaster = siteMapFinderFimaster();
     while(!siteMapFinderFilmasterFlag){require('deasync').sleep(100);}
     filmUrlListFilmaster.forEach(function(value){
-      findFilmaster(req,value.link);
+      findFilmaster(req,value);
     });
   }
 
@@ -177,6 +194,9 @@ exports.create = function(req, res) {
         });
         $('#titleDetails').find('a[href*="country"]').filter(function () {
           film.country.push($(this).text());
+        });
+        $('.poster').find('img[itemprop="image"]').filter(function(){
+          film.img = $(this).attr('src');
         });
         if (film.originalTitle === '') {
           film.originalTitle = film.title;
@@ -280,6 +300,52 @@ exports.create = function(req, res) {
     while(!defaultFlag){require('deasync').sleep(100);}
     update(res, film, Film);
   }
+
+  function findFilmaster(req,url) {
+    console.log('Started filmaster function. ' + url);
+    var film = new Film(req);
+    var defaultFlag = false;
+    request(String(url), function (error, response, html) {
+      console.log('Started request: ' + url);
+      if (!error && response.statusCode === 200) {
+        var $ = cheerio.load(html);
+        $('.poster').filter(function () {
+          film.title = $(this).find('img').attr('alt');
+          film.img = 'http:' + $(this).find('img').attr('src');
+          film.release = $('.movie').children().children().find('span').text().substring(1,5);
+        });
+        $('.average-rating').filter(function () {
+          film.ratingFilmaster = $(this).text();
+        });
+
+        $('.description').children().filter(function () {
+          film.description = $(this).text();
+        });
+        $('header').find('a[href*="osoba"]').children().filter(function () {
+          var value = $(this);
+          for(var i =0; i<$(this).length;i++){
+            film.director.push(value.text().trim());
+            value = $(this).next();
+          }
+        });
+        $('.actor').find('a[href*="osoba"]').filter(function () {
+          var value = $(this);
+          for(var i =0; i<$(this).length;i++){
+            film.cast.push(value.text().trim());
+            value = $(this).next();
+          }
+        });
+        defaultFlag =true;
+      }
+      else {
+        findFilmaster(req, url);
+      }
+    });
+    while(!defaultFlag){require('deasync').sleep(100);}
+    defaultFlag = false;
+    update(res,film,Film);
+  };
+
   function save(film){
     film.save(function(err) {
       if (err) {
@@ -293,23 +359,23 @@ exports.create = function(req, res) {
     });
   }
 };
+
 function update(res, film, Film){
-  console.log(film.title + ', ' + film.release);
-  Film.find({ title: film.title }, { release: film.release }).exec(function(err, filmFound) {
+
+  var dbFinder = function(res) {
+    Film.findOne({'originalTitle': new RegExp(["^", film.originalTitle, "$"].join(""), "i"), 'release': film.release}, function(err, data) {
+      if (err) res(err, null);
+      res(null, data);
+    });
+  };
+  dbFinder(function(err,filmFound) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
-    else if(filmFound.length === 0){
-      film.save(function (err) {
-        if(err) {
-          console.error('ERROR!');
-        }
-      });
-    }
-    else if(filmFound.length === 1){
-      var filmToUpdate = filmFound[0];
+    else if(typeof filmFound !== 'undefined' && filmFound!== null){
+      var filmToUpdate = filmFound;
       if(film.ratingFilmaster !== '0'){
         filmToUpdate.ratingFilmaster = film.ratingFilmaster;
       }
@@ -326,9 +392,13 @@ function update(res, film, Film){
       if(film.description !== '' && filmToUpdate.description === ''){
         filmToUpdate.description = film.description;
       }
-      if(film.img !== '' && filmToUpdate.img === ''){
-        filmToUpdate.img = film.img;
+      if(film.nominations !== 0){
+        filmToUpdate.nominations = film.nominations;
       }
+      if(film.won !== 0){
+        filmToUpdate.won = film.won;
+      }
+      film.cast.slice(3, film.cast.length);
       filmToUpdate.cast = _.union(film.cast, filmToUpdate.cast);
       filmToUpdate.director = _.union(film.director, filmToUpdate.director);
 
@@ -346,8 +416,28 @@ function update(res, film, Film){
         }
       }
       filmToUpdate.country = _.union(film.country, filmToUpdate.country);
-
+      filmToUpdate.awardsRating = filmToUpdate.won * 5 + filmToUpdate.nominations;
       filmToUpdate.save(function (err) {
+        if(err) {
+          console.error('ERROR!');
+        }
+      });
+    }
+    else {
+      for(var i =0; i<film.type.length; i++){
+        var typ = findInDictionary(genreDictionary,film.type[i]);
+        if(typeof typ !== 'undefined'){
+          film.type[i] = typ;
+        }
+      }
+      for(var j=0; j<film.country.length; j++){
+        var kraj = findInDictionary(countriesDictionary, film.country[j]);
+        if(typeof kraj !== 'undefined'){
+          film.country[j] = kraj;
+        }
+      }
+
+      film.save(function (err) {
         if(err) {
           console.error('ERROR!');
         }
