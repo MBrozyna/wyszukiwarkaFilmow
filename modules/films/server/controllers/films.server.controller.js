@@ -17,7 +17,7 @@ var path = require('path'),
   siteMapFinderFilmasterFlag = false,
   updateFlag = false,
   genreDictionary = [{ key: 'Action', value: 'Akcja' }, { key: 'Adventure', value: 'Przygodowy' }, { key: 'Animation', value: 'Animacja' }, { key: 'Biography', value: 'Biograficzny' }, { key: 'Comedy', value: 'Komedia' }, { key: 'Crime', value: 'Gangsterski' }, { key: 'Documentary', value: 'Dokumentalny' }, { key: 'Drama', value: 'Dramat' }, { key: 'Family', value: 'Familijny' }, { key: 'Fantasy', value: 'Fantasy' }, { key: 'Film-Noir', value: 'Film-Noir' }, { key: 'History', value: 'Historyczny' }, { key: 'Horror', value: 'Horror' }, { key: 'Music', value: 'Muzyczny' }, { key: 'Musical', value: 'Musical' }, { key: 'Mystery', value: 'Baśń' }, { key: 'Romance', value: 'Romans' }, { key: 'Sci-Fi', value: 'Sci-Fi' }, { key: 'Sport', value: 'Sportowy' }, { key: 'Thriller', value: 'Thriller' }, { key: 'War', value: 'Wojenny' }, { key: 'Western', value: 'Western' }],
-  countriesDictionary = [{ key: 'Argentina', value: 'Argentyna' }, { key: 'Australia', value: 'Australia' }, { key: 'Austria', value: 'Austria' }, { key: 'Belgium', value: 'Belgia' }, { key: 'Brazil', value: 'Brazylia' },{ key: 'Bulgaria', value: 'Bułgaria' }, { key: 'Canada', value: 'Kanada' }, { key: 'China', value: 'Chiny' }, { key: 'Colombia', value: 'Kolumbia' },{ key: 'Costa Rica', value: 'Kostaryka' }, { key: 'Czech Republic', value: 'Czechy' }, { key: 'Denmark', value: 'Dania' }, { key: 'Finland', value: 'Finlandia' }, { key: 'France', value: 'Francja' }, { key: 'Germany', value: 'Niemcy' },{ key: 'Greece', value: 'Grecja' }, { key: 'Hong Kong', value: 'Hongkong' }, { key: 'Hungary', value: 'Węgry' }, { key: 'Iceland', value: 'Islandia' }, { key: 'India', value: 'Indie' }, { key: 'Iran', value: 'Iran' }, { key: 'Ireland', value: 'Irlandia' }, { key: 'Italy', value: 'Włochy' }, { key: 'Japan', value: 'Japonia' }, { key: 'Malaysia', value: 'Malezja' },{ key: 'Mexico', value: 'Meksyk' }, { key: 'Netherlands', value: 'Holandia' } , { key: 'New Zealand', value: 'Nowa Zelandia' }, { key: 'Pakistan', value: 'Pakistan' }, { key: 'Poland', value: 'Polska' }, { key: 'Portugal', value: 'Portugalia' }, { key: 'Romania', value: 'Rumunia' }, { key: 'Russia', value: 'Rosja' }, { key: 'Singapore', value: 'Singapur' }, { key: 'South Africa', value: 'RPA' },{ key: 'Spain', value: 'Hiszpania' }, { key: 'Sweden', value: 'Szwecja' }, { key: 'Switzerland', value: 'Szwajcaria' }, { key: 'Thailand', value: 'Tajlandia' }, { key: 'United Kingdom', value: 'Wielka Brytania' }, { key: 'UK', value: 'Wielka Brytania' }, { key: 'United States', value: 'USA' }, { key: 'Norway', value: 'Norwegia'}, { key: 'Taiwan', value: 'Tajwan'}, { key: 'West Germany', value: 'RFN'}, { key: 'Czechoslovakia', value: 'Czechosłowacja'}, { key: 'Soviet Union', value: 'ZSRR'}, { key: 'South Korea', value: 'Korea Południowa'}, { key: 'Bosnia and Herzegovina', value: 'Bośnia i Hercegowina'}, { key: 'Slovenia', value: 'Słowenia'}, { key: 'Bahamas', value: 'Bahamy'}];
+  countriesDictionary = [{ key: 'Argentina', value: 'Argentyna' }, { key: 'Australia', value: 'Australia' }, { key: 'Austria', value: 'Austria' }, { key: 'Belgium', value: 'Belgia' }, { key: 'Brazil', value: 'Brazylia' },{ key: 'Bulgaria', value: 'Bułgaria' }, { key: 'Canada', value: 'Kanada' }, { key: 'China', value: 'Chiny' }, { key: 'Colombia', value: 'Kolumbia' },{ key: 'Costa Rica', value: 'Kostaryka' }, { key: 'Czech Republic', value: 'Czechy' }, { key: 'Denmark', value: 'Dania' }, { key: 'Finland', value: 'Finlandia' }, { key: 'France', value: 'Francja' }, { key: 'Germany', value: 'Niemcy' },{ key: 'Greece', value: 'Grecja' }, { key: 'Hong Kong', value: 'Hongkong' }, { key: 'Hungary', value: 'Węgry' }, { key: 'Iceland', value: 'Islandia' }, { key: 'India', value: 'Indie' }, { key: 'Iran', value: 'Iran' }, { key: 'Ireland', value: 'Irlandia' }, { key: 'Italy', value: 'Włochy' }, { key: 'Japan', value: 'Japonia' }, { key: 'Malaysia', value: 'Malezja' },{ key: 'Mexico', value: 'Meksyk' }, { key: 'Netherlands', value: 'Holandia' } , { key: 'New Zealand', value: 'Nowa Zelandia' }, { key: 'Pakistan', value: 'Pakistan' }, { key: 'Poland', value: 'Polska' }, { key: 'Portugal', value: 'Portugalia' }, { key: 'Romania', value: 'Rumunia' }, { key: 'Russia', value: 'Rosja' }, { key: 'Singapore', value: 'Singapur' }, { key: 'South Africa', value: 'RPA' },{ key: 'Spain', value: 'Hiszpania' }, { key: 'Sweden', value: 'Szwecja' }, { key: 'Switzerland', value: 'Szwajcaria' }, { key: 'Thailand', value: 'Tajlandia' }, { key: 'United Kingdom', value: 'Wielka Brytania' }, { key: 'UK', value: 'Wielka Brytania' }, { key: 'United States', value: 'USA' }, { key: 'Norway', value: 'Norwegia' }, { key: 'Taiwan', value: 'Tajwan' }, { key: 'West Germany', value: 'RFN' }, { key: 'Czechoslovakia', value: 'Czechosłowacja' }, { key: 'Soviet Union', value: 'ZSRR' }, { key: 'South Korea', value: 'Korea Południowa' }, { key: 'Bosnia and Herzegovina', value: 'Bośnia i Hercegowina' }, { key: 'Slovenia', value: 'Słowenia' }, { key: 'Bahamas', value: 'Bahamy' }];
   //filmasterGenreDirectory['Dramat', 'Komedia', 'Gangsterski', 'Musical', 'Sensacyjny', ''];
 /**
  * Create a FilmUrl
@@ -147,7 +147,6 @@ exports.create = function(req, res) {
     filmUrlListFilmweb.forEach(function(value){
       findFilmweb(req,value.link);
     });
-    //findFilmweb(req,'http://www.filmweb.pl/Afrykanska.Krolowa');
   }
   if(req.body.filmaster){
     var filmUrlListFilmaster = siteMapFinderFimaster();
@@ -344,7 +343,7 @@ exports.create = function(req, res) {
     while(!defaultFlag){require('deasync').sleep(100);}
     defaultFlag = false;
     update(res,film,Film);
-  };
+  }
 
   function save(film){
     film.save(function(err) {
@@ -363,7 +362,7 @@ exports.create = function(req, res) {
 function update(res, film, Film){
 
   var dbFinder = function(res) {
-    Film.findOne({'originalTitle': new RegExp(["^", film.originalTitle, "$"].join(""), "i"), 'release': film.release}, function(err, data) {
+    Film.findOne({ 'originalTitle': new RegExp(["^", film.originalTitle, "$"].join(""), "i"), 'release': film.release }, function(err, data) {
       if (err) res(err, null);
       res(null, data);
     });
@@ -424,16 +423,16 @@ function update(res, film, Film){
       });
     }
     else {
-      for(var i =0; i<film.type.length; i++){
-        var typ = findInDictionary(genreDictionary,film.type[i]);
-        if(typeof typ !== 'undefined'){
-          film.type[i] = typ;
+      for(var k =0; k<film.type.length; k++){
+        var typGenDic = findInDictionary(genreDictionary,film.type[k]);
+        if(typeof typGenDic !== 'undefined'){
+          film.type[k] = typGenDic;
         }
       }
-      for(var j=0; j<film.country.length; j++){
-        var kraj = findInDictionary(countriesDictionary, film.country[j]);
-        if(typeof kraj !== 'undefined'){
-          film.country[j] = kraj;
+      for(var l=0; l<film.country.length; l++){
+        var krajCounDic = findInDictionary(countriesDictionary, film.country[l]);
+        if(typeof krajCounDic !== 'undefined'){
+          film.country[l] = krajCounDic;
         }
       }
 
@@ -523,6 +522,17 @@ exports.filmByTitleAndYear = function(req,res,film){
   });
 };
 
+var recomendationAlgorithm = function(req,res) {
+  Film.find().sort('-created').populate('user', 'displayName').exec(function(err, films) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(films);
+    }
+  });
+};
 /**
  * Film middleware
  */
@@ -570,12 +580,12 @@ function findInDictionary(dict,key){
 }
 function ogiginalTitleReplace(string){
   var replace0 = string.replace(/ą/g,"a");
-  var replace1 = replace0.replace(/ę/g, "e");
-  var replace2 = replace1.replace(/ż/g, "z");
-  var replace3 = replace2.replace(/ć/g, "c");
-  var replace4 = replace3.replace(/ł/g, "l");
-  var replace5 = replace4.replace(/ś/g, "s");
-  var replace6 = replace5.replace(/ń/g, "n");
-  var replace7 = replace6.replace(/ź/g, "z");
+  var replace1 = replace0.replace(/ę/g, 'e');
+  var replace2 = replace1.replace(/ż/g, 'z');
+  var replace3 = replace2.replace(/ć/g, 'c');
+  var replace4 = replace3.replace(/ł/g, 'l');
+  var replace5 = replace4.replace(/ś/g, 's');
+  var replace6 = replace5.replace(/ń/g, 'n');
+  var replace7 = replace6.replace(/ź/g, 'z');
   return replace7;
 }

@@ -64,7 +64,7 @@
         .state('Scrapper', {
           url: '/scrapper',
           templateUrl: 'modules/films/client/views/auto-scrapper.client.view.html',
-          controller: 'FilmsController',
+          controller: 'ScrapperController',
           controllerAs: 'vm',
           resolve: {
             filmResolve: newFilm
