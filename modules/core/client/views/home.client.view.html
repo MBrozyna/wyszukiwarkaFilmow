@@ -12,43 +12,53 @@
         <fieldset>
           <div class="col-md-6">
             <label class="control-label" for="country">Kraj</label>
-            <select name="singleSelect" ng-model="film.country" id="country" class="form-control" placeholder="Country" multiple>
+            <select name="singleSelect" ng-model="history.country" id="country" class="form-control" placeholder="Country" multiple>
               <option value="{{country}}" ng-repeat="country in countries" ng-bind="country"></option>
             </select>
             <label class="control-label" for="director">Reżyser</label>
-            <input name="name" type="text" ng-model="film.director" id="director" class="form-control" placeholder="Reżyser">
+            <input name="name" type="text" ng-model="history.director" id="director" class="form-control" placeholder="Reżyser">
             <label class="control-label" for="cast">Aktorzy</label>
-            <input name="name" type="text" ng-model="film.cast" id="cast" class="form-control" placeholder="Aktorzy">
+            <input name="name" type="text" ng-model="history.cast" id="cast" class="form-control" placeholder="Aktorzy">
             <div class="col-md-6">
               <label class="control-label" for="dateFrom">Data od</label>
-              <input name="name" type="text" ng-model="film.dateFrom" id="dateFrom" class="form-control" placeholder="Rok produkcji w formacie yyyy">
+              <input name="name" type="text" ng-model="history.dateFrom" id="dateFrom" class="form-control" placeholder="Rok produkcji w formacie yyyy">
             </div>
             <div class="col-md-6">
               <label class="control-label" for="dateTo">Data do</label>
-              <input name="name" type="text" ng-model="film.dateTo" id="dateTo" class="form-control" placeholder="Rok produkcji w formacie yyyy">
+              <input name="name" type="text" ng-model="history.dateTo" id="dateTo" class="form-control" placeholder="Rok produkcji w formacie yyyy">
             </div>
           </div>
           <div class="col-md-6">
             <label class="control-label" for="country">Maksymalna długość</label>
-            <input name="name" type="text" ng-model="film.duration" id="duration" class="form-control" placeholder="Czas trwania w minutach" required>
+            <input name="name" type="text" ng-model="history.duration" id="duration" class="form-control" placeholder="Czas trwania w minutach" required>
             <label class="control-label" for="type">Typ</label>
-            <select name="multipleType" ng-model="film.type" id="type" class="form-control" placeholder="Typ" multiple>
+            <select name="multipleType" ng-model="history.type" id="type" class="form-control" placeholder="Typ" multiple>
               <option value="{{type}}" ng-repeat="type in types" ng-bind="type"></option>
             </select>
             <label class="control-label" for="country">Strona źródłowa</label></br>
             <label>
-              <input type="checkbox" name="imdb" ng-model="film.imdb"> imdb.com
+              <input type="checkbox" name="imdb" ng-model="history.imdb"> imdb.com
             </label><br/>
             <label>
-              <input type="checkbox" name="filmweb" ng-model="film.filmweb"> filmweb.pl
+              <input type="checkbox" name="filmweb" ng-model="history.filmweb"> filmweb.pl
             </label><br/>
             <label>
-              <input type="checkbox" name="filmaster" ng-model="film.filmaster"> filmaster.pl
+              <input type="checkbox" name="filmaster" ng-model="history.filmaster"> filmaster.pl
             </label><br/>
             <label class="control-label" for="country">Ocena</label>
-            <input name="name" type="text" ng-model="film.rating" id="rating" class="form-control" placeholder="Przykład: 9,8"></br>
+            <input name="name" type="text" ng-model="history.rating" id="rating" class="form-control" placeholder="Przykład: 9,8"></br>
           </div>
           <div class="col-md-12">
+            <div class="col-md-6">
+              <label>
+                <input type="checkbox" name="wygrane" ng-model="history.wygrane">Wygrane
+              </label>
+            </div>
+            <div class="col-md-6">
+              <label>
+                <input type="checkbox" name="sumarycznie" ng-model="history.sumarycznie">Sumarycznie
+              </label>
+            </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-lg">Uruchom wyszukiwanie</button>
             </div>
@@ -60,12 +70,7 @@
       </form>
     </div>
   </div>
-  <p>Informacje: Przymanjmniej jedna strona źródłowa musi zostać uzupełniona. Do każdego wyszukiwania zalicza się średnia ocen z wybranego/wybranych serwisów *10, oraz suma otrzymanych nagród *5 oraz nominacji.
-    W przypadku, gdy wypełnionych jest więcej danych, każda pasująca dana ma przelicznik 5.</p>
-  <br><strong>Przykład:</strong> </br>Szukamy filmu, który wyreżyserował Howard Hawks, ma maksymalnie 150 minut długości oraz zalicza się do gatunku thriller oraz komedia. Źródłem wyszukiwania ma być strona imdb.com</p>
-  <br>Dla filmu<strong> Drapiezne malenstwo </strong>otrzymujemy następujący wynik wyszukiwania: </br>
-  Wynik = 8 (średnia ocen) * 10 + (liczba nagród) * 5 + liczba nominacji + 5(zgodny reżyser) + 5(czas trwania filmu) + 5(gatunek komedia) + 0( brak gatunku thriller w opisie filmu).</p>
-  <div class="row">
+  <!--<div class="row">
     <h2>Ostanio znalezione:</h2>
     <div class="col-md-3">
       <h2><strong>T</strong>ytuł</h2>
@@ -83,5 +88,5 @@
       <h2><strong>T</strong>Tytuł</h2>
       <a target="_blank" href="http://mongodb.org/"> zdjęcie</a>
     </div>
-  </div>
+  </div>-->
 </section>

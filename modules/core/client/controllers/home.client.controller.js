@@ -5,14 +5,14 @@
     .module('core')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['FilmsService', '$q', 'Authentication', '$scope', '$filter', 'Admin', '$state'];
+  HomeController.$inject = ['FilmsService', '$q', 'Authentication', '$scope', '$filter', 'Admin', '$state', 'HistoriesService'];
 
 
 
-  function HomeController(FilmsService, $q, Authentication ,$scope, $filter, Admin, $state) {
+  function HomeController(FilmsService, $q, Authentication ,$scope, $filter, Admin, $state, HistoriesService) {
 
     var vm = this;
-    $scope.film = new FilmsService();
+    $scope.history = new HistoriesService();
     $scope.authentication = Authentication;
 
     function doQuery(){
@@ -43,6 +43,21 @@
     function(){
       console.log('error');
     });
+/*
+    function doQueryHistory(){
+      var d = $q.defer();
+      var result = HistoriesService.query({},function(){
+        d.resolve(result);
+      });
+      return d.promise;
+    }
+    doQueryHistory().then(function(history){
+          $scope.histories = history.slice(Math.max(history.length -4 ,history.length ))
+        },
+        function(){
+          console.log('error');
+        });*/
+
     $scope.error = null;
     $scope.form = {};
     $scope.find = find;
@@ -54,7 +69,7 @@
         $scope.$broadcast('show-errors-check-validity', 'vm.form.filmForm');
         return false;
       }
-      $scope.film.$save(successCallback, errorCallback);
+      $scope.history.$save(successCallback, errorCallback);
 
       function successCallback(res) {
         $state.go('films.view', {

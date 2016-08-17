@@ -9,50 +9,47 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke Films Permissions
+ * Invoke Histories Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
     roles: ['admin'],
     allows: [{
-      resources: '/api/films',
+      resources: '/api/histories',
       permissions: '*'
     }, {
-      resources: '/api/films/:filmId',
+      resources: '/api/histories/:historyId',
       permissions: '*'
-    }, {
-      resources: '/api/scrapper',
-      permissions: ['get', 'post']
     }]
   }, {
     roles: ['user'],
     allows: [{
-      resources: '/api/films',
+      resources: '/api/histories',
       permissions: ['get', 'post']
     }, {
-      resources: '/api/films/:filmId',
+      resources: '/api/histories/:historyId',
       permissions: ['get']
     }]
   }, {
     roles: ['guest'],
     allows: [{
-      resources: '/api/films',
+      resources: '/api/histories',
       permissions: ['get']
     }, {
-      resources: '/api/films/:filmId',
+      resources: '/api/histories/:historyId',
       permissions: ['get']
     }]
   }]);
 };
 
 /**
- * Check If Films Policy Allows
+ * Check If Histories Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an Film is being processed and the current user created it then allow any manipulation
-  if (req.film && req.user && req.film.user && req.film.user.id === req.user.id) {
+  // If an History is being processed and the current user created it then allow any manipulation
+  if (req.history && req.user && req.history.user && req.history.user.id === req.user.id) {
     return next();
   }
 
@@ -67,7 +64,7 @@ exports.isAllowed = function (req, res, next) {
         return next();
       } else {
         return res.status(403).json({
-          message: '403 zakaz dostępu'
+          message: 'User is not authorized'
         });
       }
     }

@@ -45,7 +45,7 @@
           filmResolve: getFilm
         },
         data: {
-          roles: ['user', 'admin'],
+          roles: ['user', 'admin', 'guest'],
           pageTitle: 'Edit Film {{ filmResolve.name }}'
         }
       })

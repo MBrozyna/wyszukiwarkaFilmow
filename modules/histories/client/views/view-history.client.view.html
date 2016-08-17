@@ -1,0 +1,63 @@
+<section>
+  <div class="page-header">
+    <h1 data-ng-bind="vm.history.title"></h1>
+  </div>
+  <div class="pull-right"
+       data-ng-show="vm.history.isCurrentUserOwner">
+    <a class="btn btn-primary"
+       data-ui-sref="histories.edit({ historyId: vm.history._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" data-ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <small>
+    <div class="col-md-2">
+      <img src="{{vm.history.img}}" alt="{vm.history.title}}" title="{{vm.history.title}}" width="140" height="200">
+    </div>
+  </small>
+  <div class="col-md-10">
+    <em class="text-muted" ng-bind="vm.history.description"></em>
+    <span></span></br></br>
+    <div class="col-md-4" data-ng-if="vm.history.ratingFilmweb != '0'">
+      <center><h4>Filmweb:</h4>
+        <img src="modules/core/client/img/brand/star.png" alt="{{vm.history.title}}" title="{{vm.history.title}}" width="30" height="30" >
+        <em><b>{{vm.history.ratingFilmweb}}</b></em></center>
+    </div>
+    <div class="col-md-4" data-ng-if="vm.history.ratingImdb != '0'">
+      <center><h4>Imdb:</h4>
+        <img src="modules/core/client/img/brand/star.png" alt="{{vm.history.title}}" title="{{vm.history.title}}" width="30" height="30" >
+        <em><b>{{vm.history.ratingImdb}}</b></em></center>
+    </div>
+    <div class="col-md-4" data-ng-if="vm.history.ratingFilmaster != '0'">
+      <center><h4>Filmaster:</h4>
+        <img src="modules/core/client/img/brand/star.png" alt="{{vm.history.title}}" title="{{vm.history.title}}" width="30" height="30" >
+        <em><b>{{vm.history.ratingFilmaster}}</b></em></center>
+    </div>
+  </div>
+  <div clas="col-md-10">
+    <div class="col-md-5">
+      </br></br><span>Reżyser: </span>
+      <b><span ng-repeat-start="director in vm.history.director" ng-bind="director">
+        </span>, <span ng-repeat-end></span></br></br></b>
+      <span>Kraj: </span>
+      <b><span ng-repeat-start="country in vm.history.country" ng-bind="country">
+        </span>, <span ng-repeat-end></span></br></br></b>
+      <span>Rodzaj:</span>
+      <b><span ng-repeat-start="type in vm.history.type" ng-bind="type"></span>, <span ng-repeat-end></span></br></br></b>
+      <p>Aktorzy:</p>
+      <b><div data-ng-repeat="star in vm.history.cast" ng-bind="star"></br></div></b>
+    </div>
+    <div class="col-md-5">
+      </br></br><div data-ng-if="vm.history.won != '0'">
+      <span>Zdobyte nagrody: <b>{{vm.history.won}}</b></span>
+      <div data-ng-if="vm.history.nominations !='0'">
+        <span>Nominacje: <b>{{vm.history.nominations }}</b></span>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+  <p class="lead" data-ng-bind="vm.history.content"></p>
+</section>

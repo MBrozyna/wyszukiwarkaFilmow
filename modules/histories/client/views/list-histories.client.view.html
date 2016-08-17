@@ -1,0 +1,23 @@
+<section>
+  <div class="page-header">
+    <h1>Historia wyszukiwania</h1>
+  </div>
+  <div class="list-group">
+    <a data-ng-repeat="history in vm.histories"
+       data-ui-sref="histories.view({ historyId: history._id })"
+       class="list-group-item" >
+      <small class="list-group-item-text">
+        <!--<span data-ng-if="history.film" data-ng-bind="history.searchParameters[0]"></span>-->
+        Znaleziony
+        <span data-ng-bind="history.created | date:'mediumDate'"></span>
+        przez
+        <span data-ng-if="history.user" data-ng-bind="history.user.displayName"></span>
+        <span data-ng-if="!history.user">Usuniętego użytkownika</span>
+      </small>
+      <h4 class="list-group-item-heading" data-ng-bind="history.title"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" data-ng-if="vm.histories.$resolved && !vm.histories.length">
+    Brak historii
+  </div>
+</section>

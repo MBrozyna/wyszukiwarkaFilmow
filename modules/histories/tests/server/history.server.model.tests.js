@@ -6,17 +6,17 @@
 var should = require('should'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
-  Film = mongoose.model('Film');
+  History = mongoose.model('History');
 
 /**
  * Globals
  */
-var user, film;
+var user, history;
 
 /**
  * Unit tests
  */
-describe('Film Model Unit Tests:', function() {
+describe('History Model Unit Tests:', function() {
   beforeEach(function(done) {
     user = new User({
       firstName: 'Full',
@@ -28,8 +28,8 @@ describe('Film Model Unit Tests:', function() {
     });
 
     user.save(function() { 
-      film = new Film({
-        name: 'Film Name',
+      history = new History({
+        name: 'History Name',
         user: user
       });
 
@@ -40,23 +40,24 @@ describe('Film Model Unit Tests:', function() {
   describe('Method Save', function() {
     it('should be able to save without problems', function(done) {
       this.timeout(0);
-      return film.save(function(err) {
+      return history.save(function(err) {
         should.not.exist(err);
         done();
       });
     });
 
     it('should be able to show an error when try to save without name', function(done) { 
-      film.name = '';
+      history.name = '';
 
-      return film.save(function(err) {
+      return history.save(function(err) {
         should.exist(err);
         done();
       });
     });
   });
+
   afterEach(function(done) { 
-    Film.remove().exec(function(){
+    History.remove().exec(function(){
       User.remove().exec(function(){
         done();  
       });
